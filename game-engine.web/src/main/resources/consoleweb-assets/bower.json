@@ -25,6 +25,7 @@
     "i18next": "1.7",
     "angular-ui-bootstrap-datetimepicker": "^1.3.3",
     "bootstrap": "^3.3.6",
-    "bootstrap-vertical-tabs": "^1.2.1"
+    "bootstrap-vertical-tabs": "^1.2.1",
+    "angular-cron-jobs": "^1.4.2"
   }
 }

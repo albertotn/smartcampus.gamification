@@ -30,7 +30,8 @@ var app = angular.module('gamificationEngine', [
 	'ui.bootstrap',
 	'jm.i18next',
 	'toggle-switch',
-	'ui.bootstrap.datetimepicker'
+	'ui.bootstrap.datetimepicker',
+	'angular-cron-jobs'
 ])
 
 // Switch application views and states
