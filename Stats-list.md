@@ -9,6 +9,7 @@
 #### Informazioni gioco globali: ####
 * Numero totale di giocatori;
 * Numero di giocatori attivi;
+* Media dei punti conseguiti per giorno da tutti gli utenti attivi;
 * Durata totale del gioco (o inizio e fine data o numero di giorni da quando il gioco è attivo;
 
 #### Grafici (range di default: ultima settimana):
@@ -19,6 +20,6 @@
 * Grafico a torta per mostrare la percentuale di punti per tipo;
 
 
-#### Altre informazioni da includere nella pagina
+#### Altre informazioni da includere nella pagina (da verificare se possibile realizzarlo o no)
 * Ultimi 10 utenti aggiunti (con nome, foto profilo se c'è l'opzione, data di iscrizione)
-* Tab con classifica giocatori (varie sfide disponibili), con possibilità di cliccare su ogni giocatore per visualizzare varie informazioni come nome, punti conseguiti, badge, attività giornaliera ecc...
+* Tab con classifica giocatori (varie sfide disponibili), con possibilità di cliccare su ogni giocatore per visualizzare varie informazioni come nome, punti conseguiti, badge, attività giornaliera, media dei punti conseguiti ogni giorno ecc...
