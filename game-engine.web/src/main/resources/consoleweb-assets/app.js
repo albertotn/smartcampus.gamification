@@ -20,50 +20,62 @@ var app = angular.module('gamificationEngine', [
 	'gamificationEngine.actions',
 	'gamificationEngine.game',
 	'gamificationEngine.monitor',
+    'gamificationEngine.stats',
 	'gamificationEngine.home',
 	'gamificationEngine.login',
 	'gamificationEngine.rules',
 	'gamificationEngine.tasks',
 	'gamificationEngine.modals',
 	'gamificationEngine.services',
+    'gamificationEngine.statsServices',
 	'ui.router',
 	'ui.bootstrap',
 	'jm.i18next',
 	'toggle-switch',
-	'ui.bootstrap.datetimepicker'
+	'ui.bootstrap.datetimepicker',
+    'chart.js'
 ])
 
 // Switch application views and states
 .config(
-	function ($stateProvider, $urlRouterProvider) {
-		$stateProvider
-			.state('home', {
-				url: '/home',
-				templateUrl: 'home/home.html',
-				controller: 'HomeCtrl',
-				data: {
-					page: 'home'
-				}
-			})
+    function ($stateProvider, $urlRouterProvider) {
+        $stateProvider
+            .state('home', {
+                url: '/home',
+                templateUrl: 'home/home.html',
+                controller: 'HomeCtrl',
+                data: {
+                    page: 'home'
+                }
+            })
 
-		.state('game', {
-			url: '/game/:id?tab',
-			templateUrl: 'game/game.html',
-			controller: 'GameCtrl',
-			data: {
-				page: 'game'
-			}
-		})
+        .state('game', {
+            url: '/game/:id?tab',
+            templateUrl: 'game/game.html',
+            controller: 'GameCtrl',
+            data: {
+                page: 'game'
+            }
+        })
 
-		.state('game-monitor', {
-			url: '/game-monitor/:id',
-			templateUrl: 'game-monitor/game-monitor.html',
-			controller: 'MonitorCtrl',
-			data: {
-				page: 'monitor'
-			}
-		})
+        .state('game-monitor', {
+            url: '/game-monitor/:id',
+            templateUrl: 'game-monitor/game-monitor.html',
+            controller: 'MonitorCtrl',
+            data: {
+                page: 'monitor'
+            }
+        })
 
-		$urlRouterProvider.otherwise("/home");
-	}
+        .state('game-stats', {
+            url: '/game-stats/:id',
+            templateUrl: 'game-stats/game-stats.html',
+            controller: 'StatsCtrl',
+            data: {
+                page: 'stats'
+            }
+        })
+
+        $urlRouterProvider.otherwise("/home");
+    }
 );

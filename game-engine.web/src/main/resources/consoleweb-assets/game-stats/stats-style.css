@@ -1,0 +1,43 @@
+/* Cell */
+
+.cell {
+    background-color: #eee;
+}
+
+.cell > .icon {
+    display: inline-block;
+    font-size: 45px;
+    line-height: 1;
+    padding: 15px 30px;
+    color: #fff;
+}
+
+.cell > .content {
+    padding-left: 10px;
+    display: inline-block;
+}
+
+.cell > .content span {
+    display: block;
+}
+
+.cell > .content span.stats {
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.icon.green {
+    background-color: rgb(20, 153, 72);
+}
+
+.icon.red {
+    background-color: rgb(210, 52, 44);
+}
+
+.icon.blue {
+    background-color: rgb(23, 178, 235);
+}
+
+.icon.yellow {
+    background-color: rgb(238, 138, 17);
+}

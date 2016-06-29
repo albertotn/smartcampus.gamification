@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1>Statistiche per: {{game.name}} <small>(id: {{game.id}})</small></h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <p><b>Seleziona periodo:</b></p>
+    </div>
+    <div class="col-md-10">
+        <select ng-model="period">
+            <option value="today">Oggi</option>
+            <option value="last-week">Ultima settimana</option>
+            <option value="last-month">Ultimo mese</option>
+            <option value="global">Globale</option>
+            <option value="custom">Personalizzato</option>
+        </select>
+    </div>
+</div>
+<div ng-if="period == 'custom'">
+    <div class="row">
+        <div class="col-md-2">
+            <p><b>Da:</b></p>
+        </div>
+        <div class="col-md-10">#####</div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <p><b>A:</b></p>
+        </div>
+        <div class="col-md-10">#####</div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h4>PANORAMICA DI GIOCO:</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="cell">
+            <div class="icon blue">
+                <i class="glyphicon glyphicon-user"></i>
+            </div>
+            <div class="content">
+                <span class="stats">{{stats.activePlayers}}</span>
+                <span class="title">Giocatori attivi</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="cell">
+            <div class="icon red">
+                <i class="glyphicon glyphicon-calendar"></i>
+            </div>
+            <div class="content">
+                <span class="stats">{{stats.period.totalDays}}</span>
+                <span class="title">Giorni di gioco</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="cell">
+            <div class="icon yellow">
+                <i class="glyphicon glyphicon-calendar"></i>
+            </div>
+            <div class="content">
+                <span class="stats">{{stats.period.totalDays}}</span>
+                <span class="title">Giorni di gioco</span>
+            </div>
+        </div>
+    </div>
+</div>

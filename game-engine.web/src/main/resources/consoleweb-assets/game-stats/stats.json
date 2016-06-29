@@ -1,0 +1,99 @@
+{
+    "period": {
+        "from": "2016-06-25",
+        "to": "2016-06-30",
+        "totalDays": 5
+    },
+    "activePlayers": 3600,
+    "graphsData": {
+        "totalPlayers": [
+
+        ],
+        "activePlayers": [
+
+        ],
+        "badges": [
+            {
+                "name": "Badge 1",
+                "users": 345
+            },
+            {
+                "name": "Badge 2",
+                "users": 1000
+            },
+            {
+                "name": "Badge 3",
+                "users": 3000
+            },
+            {
+                "name": "Badge 4",
+                "users": 0
+            },
+            {
+                "name": "Badge 5",
+                "users": 3
+            }
+        ],
+        "typeOfPoints": [
+            {
+                "name": "Tipo punto 1",
+                "points": 345
+                },
+            {
+                "name": "Tipo punto 2",
+                "points": 100
+                },
+            {
+                "name": "Tipo punto 3",
+                "points": 500
+                },
+            {
+                "name": "Tipo punto 4",
+                "points": 50
+                },
+            {
+                "name": "Tipo punto 5",
+                "points": 505
+                }
+            ],
+        "typeOfAtions": [
+            {
+                "name": "Azione 1",
+                "matchs": 400
+            },
+            {
+                "name": "Azione 2",
+                "matchs": 200
+            },
+            {
+                "name": "Azione 3",
+                "matchs": 50
+            },
+            {
+                "name": "Azione 4",
+                "matchs": 100
+            },
+            {
+                "name": "Azione 5",
+                "matchs": 1
+            }
+        ],
+        "globalChallengesStatus": [
+            {
+                "status": "Superate",
+                "number": 400
+            },
+            {
+                "status": "Non superate",
+                "number": 50
+            },
+            {
+                "status": "Mai iniziate",
+                "number": 95
+            }
+        ],
+        "typeOfChallenges": [
+
+        ]
+    }
+}
