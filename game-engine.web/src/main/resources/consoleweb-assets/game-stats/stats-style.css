@@ -1,3 +1,9 @@
+.v-center {
+    display: flex;
+    align-items: center
+}
+
+
 /* Cell */
 
 .cell {
@@ -8,7 +14,7 @@
     display: inline-block;
     font-size: 45px;
     line-height: 1;
-    padding: 15px 30px;
+    padding: 20px 25px;
     color: #fff;
 }
 
@@ -26,6 +32,16 @@
     font-weight: 500;
 }
 
+.cell > .content span.date-game:first-child {
+    margin-bottom: 10px;
+}
+
+.cell > .content span.date-game span {
+    font-weight: 700;
+    width: 35px;
+    display: inline-block;
+}
+
 .icon.green {
     background-color: rgb(20, 153, 72);
 }
@@ -40,4 +56,23 @@
 
 .icon.yellow {
     background-color: rgb(238, 138, 17);
+}
+
+
+/* Dashboard panel */
+
+.dash-panel {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #eee;
+}
+
+.dash-panel h5 {
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.dash-button {
+    display: inline-block;
+    float: right;
 }

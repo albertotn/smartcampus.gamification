@@ -17,18 +17,18 @@
         </select>
     </div>
 </div>
-<div ng-if="period == 'custom'">
-    <div class="row">
-        <div class="col-md-2">
-            <p><b>Da:</b></p>
-        </div>
-        <div class="col-md-10">#####</div>
+<div ng-if="period == 'custom'" class="row v-center">
+    <div class="col-md-1">
+        <p><b>Da:</b></p>
     </div>
-    <div class="row">
-        <div class="col-md-2">
-            <p><b>A:</b></p>
-        </div>
-        <div class="col-md-10">#####</div>
+    <div class="col-md-5">
+        <datetimepicker show-spinners="true" placeholder="mm/dd/yyyy" ng-model="from" show-meridian="showMeridian" date-format="dd-MMM-yyyy"></datetimepicker>
+    </div>
+    <div class="col-md-1">
+        <p><b>A:</b></p>
+    </div>
+    <div class="col-md-5">
+        <datetimepicker show-spinners="true" placeholder="mm/dd/yyyy" ng-model="to" show-meridian="showMeridian" date-format="dd-MMM-yyyy"></datetimepicker>
     </div>
 </div>
 
@@ -54,11 +54,11 @@
     <div class="col-md-4">
         <div class="cell">
             <div class="icon red">
-                <i class="glyphicon glyphicon-calendar"></i>
+                <i class="glyphicon glyphicon-transfer"></i>
             </div>
             <div class="content">
-                <span class="stats">{{stats.period.totalDays}}</span>
-                <span class="title">Giorni di gioco</span>
+                <span class="title date-game"><span>Da:</span> {{stats.period.from | date:'dd/MM/yyyy'}}</span>
+                <span class="title date-game"><span>A:</span> {{ stats.period.to | date:'dd/MM/yyyy'}}</span>
             </div>
         </div>
     </div>
@@ -72,6 +72,78 @@
                 <span class="stats">{{stats.period.totalDays}}</span>
                 <span class="title">Giorni di gioco</span>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h4>GRAFICI:</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="dash-panel">
+            <h5>Andamento dei giocatori per tempo</h5>
+            <div class="btn-group dash-button" uib-dropdown>
+                <button id="pointsChartType" type="button" class="btn btn-default" uib-dropdown-toggle>
+                    <i class="glyphicon glyphicon-option-vertical"></i>
+                </button>
+                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="pointsChartType">
+                    <li role="menuitem"><a ng-click="chartsData.players.type = 'line'">Grafico a linea</a></li>
+                    <li role="menuitem"><a ng-click="chartsData.players.type = 'bar'">Grafico a barre</a></li>
+                </ul>
+            </div>
+            <canvas height="100" class="chart-base" chart-type="chartsData.players.type" chart-data="chartsData.players.data" chart-labels="chartsData.players.labels" chart-colors="chartsData.players.colors" chart-series="chartsData.players.series" chart-options="chartsData.players.options">
+            </canvas>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="dash-panel">
+            <h5>Distribuzione giocate per tipo di azione</h5>
+            <canvas class="chart chart-doughnut" chart-data="chartsData.actions.data" chart-labels="chartsData.actions.labels" chart-options="chartsData.actions.options">
+            </canvas>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="dash-panel">
+            <h5>Distribuzione dei punti su totale punti</h5>
+            <canvas class="chart chart-pie" chart-data="chartsData.points.data" chart-labels="chartsData.points.labels" chart-options="chartsData.points.options">
+            </canvas>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-7">
+        <div class="dash-panel">
+            <h5>Conquista badge da parte degli utenti</h5>
+            <canvas class="chart chart-bar" chart-data="chartsData.badges.data" chart-labels="chartsData.badges.labels" chart-series="chartsData.badges.series" chart-options="chartsData.badges.options">
+            </canvas>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <h5>Dettaglio categoria "{{selectedCategoryOfBadges}}"</h5>
+        <canvas class="chart chart-bar" chart-data="chartsData.badges.data" chart-labels="chartsData.badges.labels" chart-series="chartsData.badges.series" chart-options="chartsData.badges.options">
+        </canvas>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="dash-panel">
+            <h5>Distribuzione giocate per utenti</h5>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="dash-panel">
+            <h5>Grafico superamento challenge</h5>
+            <canvas height="100" class="chart chart-horizontal-bar" chart-data="chartsData.globalChallenges.data" chart-labels="chartsData.globalChallenges.labels" chart-series="chartsData.globalChallenges.series" chart-options="chartsData.globalChallenges.options">
+            </canvas>
         </div>
     </div>
 </div>

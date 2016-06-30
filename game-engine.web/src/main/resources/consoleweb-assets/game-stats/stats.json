@@ -4,34 +4,147 @@
         "to": "2016-06-30",
         "totalDays": 5
     },
-    "activePlayers": 3600,
+    "activePlayers": 150,
     "graphsData": {
         "totalPlayers": [
-
+            {
+                "date": "2016-06-25",
+                "number": 150
+            },
+            {
+                "date": "2016-06-26",
+                "number": 160
+            },
+            {
+                "date": "2016-06-27",
+                "number": 160
+            },
+            {
+                "date": "2016-06-28",
+                "number": 180
+            },
+            {
+                "date": "2016-06-29",
+                "number": 250
+            },
+            {
+                "date": "2016-06-30",
+                "number": 400
+            }
         ],
         "activePlayers": [
-
+            {
+                "date": "2016-06-25",
+                "number": 100
+            },
+            {
+                "date": "2016-06-26",
+                "number": 50
+            },
+            {
+                "date": "2016-06-27",
+                "number": 90
+            },
+            {
+                "date": "2016-06-28",
+                "number": 175
+            },
+            {
+                "date": "2016-06-29",
+                "number": 5
+            },
+            {
+                "date": "2016-06-30",
+                "number": 74
+            }
         ],
-        "badges": [
+        "badgeCategories": [
             {
-                "name": "Badge 1",
-                "users": 345
+                "name": "Categoria 1",
+                "users": 345,
+                "badges": [
+                    {
+                        "name": "Badge 1-1",
+                        "users": 115
+                    },
+                    {
+                        "name": "Badge 2-1",
+                        "users": 110
+                    },
+                    {
+                        "name": "Badge 3-1",
+                        "users": 120
+                    }
+                ]
+
             },
             {
-                "name": "Badge 2",
-                "users": 1000
+                "name": "Categoria 2",
+                "users": 1000,
+                "badges": [
+                    {
+                        "name": "Badge 1-2",
+                        "users": 100
+                    },
+                    {
+                        "name": "Badge 2-2",
+                        "users": 0
+                    },
+                    {
+                        "name": "Badge 3-2",
+                        "users": 400
+                    },
+                    {
+                        "name": "Badge 4-2",
+                        "users": 250
+                    },
+                    {
+                        "name": "Badge 5-2",
+                        "users": 250
+                    }
+                ]
             },
             {
-                "name": "Badge 3",
-                "users": 3000
+                "name": "Categoria 3",
+                "users": 3000,
+                "badges": [
+                    {
+                        "name": "Badge 1-3",
+                        "users": 1500
+                    },
+                    {
+                        "name": "Badge 2-3",
+                        "users": 1000
+                    },
+                    {
+                        "name": "Badge 3-3",
+                        "users": 500
+                    }
+                ]
             },
             {
-                "name": "Badge 4",
-                "users": 0
+                "name": "Categoria 4",
+                "users": 0,
+                "badges": [
+                    {
+                        "name": "Badge 1-4",
+                        "users": 0
+                    },
+                    {
+                        "name": "Badge 2-4",
+                        "users": 0
+                    }
+                ]
             },
             {
-                "name": "Badge 5",
-                "users": 3
+                "name": "Categoria 5",
+                "users": 3,
+                "badges": [
+                    {
+                        "name": "Badge 1-5",
+                        "users": 3
+                    }
+                ]
             }
         ],
         "typeOfPoints": [
@@ -93,7 +206,51 @@
             }
         ],
         "typeOfChallenges": [
-
+            {
+                "name": "Challenge A",
+                "data": [{
+                        "status": "Superate",
+                        "number": 100
+            },
+                    {
+                        "status": "Non superate",
+                        "number": 0
+            },
+                    {
+                        "status": "Mai iniziate",
+                        "number": 90
+            }]
+            },
+            {
+                "name": "Challenge B",
+                "data": [{
+                        "status": "Superate",
+                        "number": 50
+            },
+                    {
+                        "status": "Non superate",
+                        "number": 150
+            },
+                    {
+                        "status": "Mai iniziate",
+                        "number": 3
+            }]
+            },
+            {
+                "name": "Challenge C",
+                "data": [{
+                        "status": "Superate",
+                        "number": 40
+            },
+                    {
+                        "status": "Non superate",
+                        "number": 40
+            },
+                    {
+                        "status": "Mai iniziate",
+                        "number": 195
+            }]
+            }
         ]
     }
 }
