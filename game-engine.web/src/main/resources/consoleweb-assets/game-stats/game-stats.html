@@ -87,10 +87,10 @@
         <div class="dash-panel">
             <h5>Andamento dei giocatori per tempo</h5>
             <div class="btn-group dash-button" uib-dropdown>
-                <button id="pointsChartType" type="button" class="btn btn-default" uib-dropdown-toggle>
+                <button id="playersChartType" type="button" class="btn btn-default" uib-dropdown-toggle>
                     <i class="glyphicon glyphicon-option-vertical"></i>
                 </button>
-                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="pointsChartType">
+                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="playersChartType">
                     <li role="menuitem"><a ng-click="chartsData.players.type = 'line'">Grafico a linea</a></li>
                     <li role="menuitem"><a ng-click="chartsData.players.type = 'bar'">Grafico a barre</a></li>
                 </ul>
@@ -105,14 +105,32 @@
     <div class="col-md-6">
         <div class="dash-panel">
             <h5>Distribuzione giocate per tipo di azione</h5>
-            <canvas class="chart chart-doughnut" chart-data="chartsData.actions.data" chart-labels="chartsData.actions.labels" chart-options="chartsData.actions.options">
+            <div class="btn-group dash-button" uib-dropdown>
+                <button id="actionsChartType" type="button" class="btn btn-default" uib-dropdown-toggle>
+                    <i class="glyphicon glyphicon-option-vertical"></i>
+                </button>
+                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="actionsChartType">
+                    <li role="menuitem"><a ng-click="chartsData.actions.type = 'pie'; chartsData.actions.options.legend.display = true">Grafico a torta</a></li>
+                    <li role="menuitem"><a ng-click="chartsData.actions.type = 'bar'; chartsData.actions.options.legend.display = false">Grafico a barre</a></li>
+                </ul>
+            </div>
+            <canvas class="chart-base" chart-type="chartsData.actions.type" chart-data="chartsData.actions.data" chart-labels="chartsData.actions.labels" chart-options="chartsData.actions.options">
             </canvas>
         </div>
     </div>
     <div class="col-md-6">
         <div class="dash-panel">
             <h5>Distribuzione dei punti su totale punti</h5>
-            <canvas class="chart chart-pie" chart-data="chartsData.points.data" chart-labels="chartsData.points.labels" chart-options="chartsData.points.options">
+            <div class="btn-group dash-button" uib-dropdown>
+                <button id="pointsChartType" type="button" class="btn btn-default" uib-dropdown-toggle>
+                    <i class="glyphicon glyphicon-option-vertical"></i>
+                </button>
+                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="pointsChartType">
+                    <li role="menuitem"><a ng-click="chartsData.points.type = 'pie'; chartsData.points.options.legend.display = true">Grafico a torta</a></li>
+                    <li role="menuitem"><a ng-click="chartsData.points.type = 'bar'; chartsData.points.options.legend.display = false">Grafico a barre</a></li>
+                </ul>
+            </div>
+            <canvas class="chart-base" chart-type="chartsData.points.type" chart-data="chartsData.points.data" chart-series="chartsData.points.series" chart-labels="chartsData.points.labels" chart-options="chartsData.points.options">
             </canvas>
         </div>
     </div>
