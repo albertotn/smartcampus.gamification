@@ -164,7 +164,16 @@
     <div class="col-md-12">
         <div class="dash-panel">
             <h5>Grafico superamento challenge</h5>
-            <canvas height="100" class="chart chart-horizontal-bar" chart-data="chartsData.globalChallenges.data" chart-labels="chartsData.globalChallenges.labels" chart-series="chartsData.globalChallenges.series" chart-options="chartsData.globalChallenges.options">
+            <div class="btn-group dash-button" uib-dropdown>
+                <button id="actionsChartType" type="button" class="btn btn-default" uib-dropdown-toggle>
+                    <i class="glyphicon glyphicon-option-vertical"></i>
+                </button>
+                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="actionsChartType">
+                    <li role="menuitem"><a ng-click="chartsData.globalChallenges.type = 'horizontalBar'">Grafico a barre orizzontali</a></li>
+                    <li role="menuitem"><a ng-click="chartsData.globalChallenges.type = 'bar'">Grafico a barre verticali</a></li>
+                </ul>
+            </div>
+            <canvas height="100" class="chart-base" chart-type="chartsData.globalChallenges.type" chart-data="chartsData.globalChallenges.data" chart-labels="chartsData.globalChallenges.labels" chart-series="chartsData.globalChallenges.series" chart-options="chartsData.globalChallenges.options">
             </canvas>
         </div>
     </div>

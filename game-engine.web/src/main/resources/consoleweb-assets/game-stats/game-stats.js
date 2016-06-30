@@ -118,6 +118,7 @@ angular.module('gamificationEngine.stats', [])
             }
         },
         globalChallenges: {
+            type: 'horizontalBar',
             series: [],
             labels: [],
             data: [],
