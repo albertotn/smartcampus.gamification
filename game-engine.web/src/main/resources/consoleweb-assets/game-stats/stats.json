@@ -147,6 +147,44 @@
                 ]
             }
         ],
+        "matchsPerPlayers": [
+            {
+                "range": "0-29",
+                "users": 10
+            },
+            {
+                "range": "30-59",
+                "users": 40
+            },
+            {
+                "range": "60-89",
+                "users": 5
+            },
+            {
+                "range": "90-119",
+                "users": 0
+            },
+            {
+                "range": "120-149",
+                "users": 7
+            },
+            {
+                "range": "150-179",
+                "users": 8
+            },
+            {
+                "range": "180-209",
+                "users": 30
+            },
+            {
+                "range": "210-239",
+                "users": 0
+            },
+            {
+                "range": "240-269",
+                "users": 50
+            }
+        ],
         "typeOfPoints": [
             {
                 "name": "Tipo punto 1",

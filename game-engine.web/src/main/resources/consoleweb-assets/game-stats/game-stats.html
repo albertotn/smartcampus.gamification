@@ -121,20 +121,24 @@
     <div class="col-md-7">
         <div class="dash-panel">
             <h5>Conquista badge da parte degli utenti</h5>
-            <canvas class="chart chart-bar" chart-data="chartsData.badges.data" chart-labels="chartsData.badges.labels" chart-series="chartsData.badges.series" chart-options="chartsData.badges.options">
+            <canvas chart-click="badgeCatClick" class="chart chart-bar" chart-data="chartsData.badges.data" chart-labels="chartsData.badges.labels" chart-series="chartsData.badges.series" chart-colors="chartsData.badges.colors" chart-options="chartsData.badges.options">
             </canvas>
         </div>
     </div>
     <div class="col-md-5">
-        <h5>Dettaglio categoria "{{selectedCategoryOfBadges}}"</h5>
-        <canvas class="chart chart-bar" chart-data="chartsData.badges.data" chart-labels="chartsData.badges.labels" chart-series="chartsData.badges.series" chart-options="chartsData.badges.options">
-        </canvas>
+        <div class="dash-panel">
+            <h5>Dettaglio categoria {{categoryBadge}}</h5>
+            <canvas class="chart chart-bar" chart-data="chartsData.badges.details.data" chart-labels="chartsData.badges.details.labels" chart-series="chartsData.badges.details.series" chart-options="chartsData.badges.details.options" chart-colors="chartsData.badges.details.colors">
+            </canvas>
+        </div>
     </div>
 </div>
 <div class="row">
     <div class="col-md-12">
         <div class="dash-panel">
             <h5>Distribuzione giocate per utenti</h5>
+            <canvas height="100" class="chart chart-bar" chart-data="chartsData.matchPlayers.data" chart-labels="chartsData.matchPlayers.labels" chart-colors="chartsData.matchPlayers.colors" chart-series="chartsData.matchPlayers.series">
+            </canvas>
         </div>
     </div>
 </div>

@@ -3,7 +3,7 @@ angular.module('gamificationEngine.stats', [])
 .controller('StatsCtrl', function ($scope, $stateParams, $timeout, gamesFactory, statsFactory) {
     $scope.alerts = {
         'loadGameError': false
-    };
+    };;
 
     // Set default period to today
     $scope.period = 'today';
@@ -42,7 +42,36 @@ angular.module('gamificationEngine.stats', [])
             series: ['Numero utenti'],
             labels: [],
             data: [[]],
-            options: {}
+            options: {},
+            colors: [
+                {
+                    backgroundColor: 'rgba(243, 45, 58,0.2)',
+                    pointBackgroundColor: 'rgba(243, 45, 58,1)',
+                    pointHoverBackgroundColor: 'rgba(243, 45, 58,1)',
+                    borderColor: 'rgba(243, 45, 58,1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBorderColor: 'rgba(243, 45, 58,0.8)'
+      }],
+            details: {
+                series: ['-'],
+                labels: [],
+                data: [[]],
+                options: {
+                    legend: {
+                        display: true,
+                        position: 'bottom'
+                    }
+                },
+                colors: [
+                    {
+                        backgroundColor: 'rgba(251, 166, 75,0.2)',
+                        pointBackgroundColor: 'rgba(251, 166, 75,1)',
+                        pointHoverBackgroundColor: 'rgba(251, 166, 75,1)',
+                        borderColor: 'rgba(251, 166, 75,1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBorderColor: 'rgba(251, 166, 75,0.8)'
+      }]
+            }
         },
         points: {
             labels: [],
@@ -64,6 +93,26 @@ angular.module('gamificationEngine.stats', [])
                 }
             }
         },
+        matchPlayers: {
+            series: ['Numero utenti'],
+            labels: [],
+            data: [[]],
+            colors: [
+                {
+                    backgroundColor: 'rgba(60, 180, 176,0.2)',
+                    pointBackgroundColor: 'rgba(60, 180, 176,1)',
+                    pointHoverBackgroundColor: 'rgba(60, 180, 176,1)',
+                    borderColor: 'rgba(60, 180, 176,1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBorderColor: 'rgba(60, 180, 176,0.8)'
+      }],
+            options: {
+                legend: {
+                    display: true,
+                    position: 'top'
+                }
+            }
+        },
         globalChallenges: {
             series: [],
             labels: [],
@@ -80,7 +129,6 @@ angular.module('gamificationEngine.stats', [])
     // Request gama using GamesFactory service
     gamesFactory.getGameById($stateParams.id).then(function (game) {
         $scope.game = game;
-        console.log(game);
     }, function () {
         $scope.alerts.loadGameError = true;
     });
@@ -139,7 +187,35 @@ angular.module('gamificationEngine.stats', [])
             $scope.chartsData.globalChallenges.data.push(data);
         });
 
+        data.graphsData.matchsPerPlayers.forEach(function (element, idx) {
+            $scope.chartsData.matchPlayers.labels.push(element.range);
+            $scope.chartsData.matchPlayers.data[0].push(element.users);
+        });
+
     }, function () {
         $scope.alerts.loadGameError = true;
     });
+
+    $scope.badgeCatClick = function (points, evt) {
+        if (!points[0]) return;
+        $scope.categoryBadge = points[0]._model.label;
+
+        $scope.chartsData.badges.details.series[0] = $scope.categoryBadge;
+        $scope.chartsData.badges.details.labels = [];
+        $scope.chartsData.badges.details.data = [[]];
+
+        var badges;
+        // Find badges category
+        $scope.stats.graphsData.badgeCategories.forEach(function (cat, idx) {
+            if (cat.name == $scope.categoryBadge)
+                badges = cat.badges;
+        });
+
+        badges.forEach(function (badge, idx) {
+            $scope.chartsData.badges.details.data[0].push(badge.users);
+            $scope.chartsData.badges.details.labels.push(badge.name);
+        });
+        console.log($scope.chartsData.badges.details);
+        $scope.$apply();
+    };
 });
