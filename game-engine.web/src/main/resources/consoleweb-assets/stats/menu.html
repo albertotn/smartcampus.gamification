@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1>Statistiche per: {{game.name}} <small>(id: {{game.id}})</small></h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <p><b>Seleziona periodo:</b></p>
+    </div>
+    <div class="col-md-10">
+        <select ng-model="period">
+            <option value="today">Oggi</option>
+            <option value="last-week">Ultima settimana</option>
+            <option value="last-month">Ultimo mese</option>
+            <option value="global">Globale</option>
+            <option value="custom">Personalizzato</option>
+        </select>
+    </div>
+</div>
+<div ng-if="period == 'custom'" class="row v-center">
+    <div class="col-md-1">
+        <p><b>Da:</b></p>
+    </div>
+    <div class="col-md-5">
+        <datetimepicker show-spinners="true" placeholder="mm/dd/yyyy" ng-model="from" show-meridian="showMeridian" date-format="dd-MMM-yyyy"></datetimepicker>
+    </div>
+    <div class="col-md-1">
+        <p><b>A:</b></p>
+    </div>
+    <div class="col-md-5">
+        <datetimepicker show-spinners="true" placeholder="mm/dd/yyyy" ng-model="to" show-meridian="showMeridian" date-format="dd-MMM-yyyy"></datetimepicker>
+    </div>
+</div>
+<div class="row stats-tab">
+    <a href="#/stats/{{game.id}}/game-stats" ng-class="{'active': selectedTab == 'game'}">
+        <div class="col-md-6">
+            Statistiche di gioco
+        </div>
+    </a>
+    <a href="#/stats/{{game.id}}/user-stats" ng-class="{'active': selectedTab == 'users'}">
+        <div class="col-md-6">
+            Statistiche utenti
+        </div>
+    </a>
+</div>
+<div ui-view></div>

@@ -1,6 +1,7 @@
-angular.module('gamificationEngine.stats', [])
+angular.module('gamificationEngine.gameStats', [])
 
-.controller('StatsCtrl', function ($scope, $stateParams, $timeout, $filter, gamesFactory, statsFactory) {
+.controller('GameStatsCtrl', function ($scope, $stateParams, $timeout, $filter, statsFactory) {
+    $scope.$parent.selectedTab = 'game';
     $scope.alerts = {
         'loadGameError': false
     };;
@@ -130,13 +131,6 @@ angular.module('gamificationEngine.stats', [])
             }
         }
     };
-
-    // Request gama using GamesFactory service
-    gamesFactory.getGameById($stateParams.id).then(function (game) {
-        $scope.game = game;
-    }, function () {
-        $scope.alerts.loadGameError = true;
-    });
 
     statsFactory.getFromRangeStats(334, 343).then(function (data) {
             $scope.stats = data;
