@@ -2,10 +2,10 @@ angular.module('gamificationEngine.statsServices', [])
 
 .factory('statsFactory', function ($rootScope, $http, $q, $timeout) {
     return {
-        getGlobalStats: function () {
+        getGlobalStatsGame: function () {
             // Request to server API without specify the range
         },
-        getFromRangeStats: function (fromDate, toDate) {
+        getFromRangeStatsGame: function (idGame, fromDate, toDate) {
             // Simulate the request to REST server
             var deferred = $q.defer();
 
@@ -17,8 +17,16 @@ angular.module('gamificationEngine.statsServices', [])
                 });
             return deferred.promise;
         },
-        getUserStats: function (id) {
+        getUsersCategories: function (idGame) {
+            var deferred = $q.defer();
 
+            $http.get('/stats/user-stats/users-category.json').success(function (data) {
+                deferred.resolve(data);
+            }).error(
+                function (e) {
+                    deferred.reject(e);
+                });
+            return deferred.promise;
         }
     }
 });

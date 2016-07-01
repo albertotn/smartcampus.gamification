@@ -3,3 +3,26 @@
         <h2>Statistiche di gioco degli utenti</h2>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="selectCategoryUsers">Seleziona la categoria:</label>
+            <select id="selectCategoryUsers" ng-model="usersCategory" class="form-control">
+                <option ng-repeat="cat in usersCategories">{{cat.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="idUser">ID giocatore:</label>
+            <input type="text" id="idUser" class="form-control" ng-model="userID" placeholder="ID giocatore (es. 45223)" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <button class="btn btn-block btn-primary button-stats" ng-click="searchStats()">
+            <i class="glyphicon glyphicon-search"></i> &emsp; Mostra statistiche
+        </button>
+    </div>
+</div>

@@ -75,6 +75,12 @@ var app = angular.module('gamificationEngine', [
             controller: 'StatsCtrl',
             data: {
                 page: 'stats'
+            },
+            resolve: {
+                // Expose projectId parameter to child states
+                id: ['$stateParams', function ($stateParams) {
+                    return $stateParams.id;
+                }]
             }
         })
 

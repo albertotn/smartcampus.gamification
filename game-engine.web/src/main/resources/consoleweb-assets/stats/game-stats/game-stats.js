@@ -132,7 +132,7 @@ angular.module('gamificationEngine.gameStats', [])
         }
     };
 
-    statsFactory.getFromRangeStats(334, 343).then(function (data) {
+    statsFactory.getFromRangeStatsGame($stateParams.id, 334, 343).then(function (data) {
             $scope.stats = data;
             // Players chart
             var array = [];
