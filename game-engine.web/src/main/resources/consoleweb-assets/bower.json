@@ -27,5 +27,12 @@
     "bootstrap": "^3.3.6",
     "bootstrap-vertical-tabs": "^1.2.1",
     "angular-chart.js": "^0.10.2"
+  },
+  "resolutions": {
+    "Chart.js": "2.x",
+    "angular-chart.js": "chartjs-2.0"
+  },
+  "devDependencies": {
+    "angular-chart.js": "chartjs-2.0"
   }
 }
