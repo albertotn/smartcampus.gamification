@@ -10,7 +10,7 @@
     <div class="col-md-6">
         <div class="form-group">
             <label for="idUser">ID GIOCATORE:</label>
-            <input type="text" id="idUser" class="form-control" ng-model="userID" placeholder="ID giocatore (es. 45223)" />
+            <input uib-popover="Vuoto per visualizzare le statistiche della categoria '{{usersCategory}}'" popover-trigger="mouseenter" type="text" id="idUser" class="form-control" ng-model="userID" placeholder="ID giocatore (es. 45223)" />
         </div>
     </div>
 </div>
@@ -75,6 +75,56 @@
                     </ul>
                 </div>
                 <canvas class="chart-base" chart-type="chartsData.challenges.type" chart-data="chartsData.challenges.data" chart-labels="chartsData.challenges.labels" chart-series="chartsData.challenges.series" chart-options="chartsData.challenges.options">
+                </canvas>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="dash-panel">
+                <h5>Distribuzione delle azioni di gioco</h5>
+                <div class="btn-group dash-button" uib-dropdown>
+                    <button id="actionsChartType" type="button" class="btn btn-default" uib-dropdown-toggle>
+                        <i class="glyphicon glyphicon-option-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="actionsChartType">
+                        <li role="menuitem"><a ng-click="chartsData.actions.type = 'pie'">Grafico a torta</a></li>
+                        <li role="menuitem"><a ng-click="chartsData.actions.type = 'bar'">Grafico a barre</a></li>
+                    </ul>
+                </div>
+                <canvas class="chart-base" chart-type="chartsData.actions.type" chart-data="chartsData.actions.data" chart-labels="chartsData.actions.labels" chart-series="chartsData.actions.series" chart-options="chartsData.actions.options">
+                </canvas>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="dash-panel">
+                <h5>Andamento challenge assegnate</h5>
+                <div class="btn-group dash-button" uib-dropdown>
+                    <button id="actionsChartType" type="button" class="btn btn-default" uib-dropdown-toggle>
+                        <i class="glyphicon glyphicon-option-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="actionsChartType">
+                        <li role="menuitem"><a ng-click="chartsData.actions.type = 'pie'">Grafico a torta</a></li>
+                        <li role="menuitem"><a ng-click="chartsData.actions.type = 'bar'">Grafico a barre</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="dash-panel">
+                <h5>Andamento guadagno badge e punti nel tempo</h5>
+                <div class="btn-group dash-button" uib-dropdown>
+                    <button id="badgesPointsChartType" type="button" class="btn btn-default" uib-dropdown-toggle>
+                        <i class="glyphicon glyphicon-option-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="badgesPointsChartType">
+                        <li role="menuitem"><a ng-click="chartsData.badgesPoints.type = 'line'">Grafico a linea</a></li>
+                        <li role="menuitem"><a ng-click="chartsData.badgesPoints.type = 'bar'">Grafico a barre</a></li>
+                    </ul>
+                </div>
+                <canvas class="chart-base" chart-type="chartsData.badgesPoints.type" chart-data="chartsData.badgesPoints.data" chart-labels="chartsData.badgesPoints.labels" chart-series="chartsData.badgesPoints.series" chart-options="chartsData.badgesPoints.options" chart-colors="chartsData.badgesPoints.colors">
                 </canvas>
             </div>
         </div>

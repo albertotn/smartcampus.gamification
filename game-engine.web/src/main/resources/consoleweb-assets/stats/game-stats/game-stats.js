@@ -215,7 +215,6 @@ angular.module('gamificationEngine.gameStats', [])
             $scope.chartsData.badges.details.data[0].push(badge.users);
             $scope.chartsData.badges.details.labels.push(badge.name);
         });
-        console.log($scope.chartsData.badges.details);
         $scope.$apply();
     };
 });

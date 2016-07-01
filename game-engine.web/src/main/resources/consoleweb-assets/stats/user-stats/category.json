@@ -65,7 +65,78 @@
                 "status": "Mai iniziate",
                 "number": 1500
             }
+        ],
+        "actions": [
+            {
+                "name": "Azione 1",
+                "matchs": 28
+            },
+            {
+                "name": "Azione 2",
+                "matchs": 32
+            },
+            {
+                "name": "Azione 3",
+                "matchs": 5
+            },
+            {
+                "name": "Azione 4",
+                "matchs": 90
+            },
+            {
+                "name": "Azione 5",
+                "matchs": 50
+            }
+        ],
+        "timeBadges": [{
+                "date": "2016-06-25",
+                "number": 5
+            },
+            {
+                "date": "2016-06-26",
+                "number": 0
+            },
+            {
+                "date": "2016-06-27",
+                "number": 2
+            },
+            {
+                "date": "2016-06-28",
+                "number": 1
+            },
+            {
+                "date": "2016-06-29",
+                "number": 1
+            },
+            {
+                "date": "2016-06-30",
+                "number": 1
+            }],
+        "timePoints": [
+            {
+                "date": "2016-06-25",
+                "number": 45
+            },
+            {
+                "date": "2016-06-26",
+                "number": 0
+            },
+            {
+                "date": "2016-06-27",
+                "number": 56
+            },
+            {
+                "date": "2016-06-28",
+                "number": 100
+            },
+            {
+                "date": "2016-06-29",
+                "number": 67
+            },
+            {
+                "date": "2016-06-30",
+                "number": 95
+            }
         ]
-
     }
 }

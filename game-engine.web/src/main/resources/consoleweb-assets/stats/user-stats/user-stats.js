@@ -51,6 +51,50 @@ angular.module('gamificationEngine.userStats', [])
                         position: 'top'
                     }
                 }
+            },
+            actions: {
+                type: 'pie',
+                series: [],
+                labels: [],
+                data: [],
+                options: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                }
+            },
+            badgesPoints: {
+                type: 'line',
+                series: [],
+                labels: [],
+                data: [],
+                options: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                colors: [
+                    {
+                        backgroundColor: 'rgba(230, 126, 24,0.2)',
+                        pointBackgroundColor: 'rgba(230, 126, 24,1)',
+                        pointHoverBackgroundColor: 'rgba(230, 126, 24,1)',
+                        borderColor: 'rgba(230, 126, 24,1)',
+                        borderWidth: 4,
+                        pointBorderColor: 'rgba(230, 126, 24,1)',
+                        pointHoverBorderColor: 'rgba(230, 126, 24,0.8)'
+      },
+                    {
+                        backgroundColor: 'rgba(231,76,60,0.4)',
+                        pointBackgroundColor: 'rgba(231,76,60,1)',
+                        pointHoverBackgroundColor: 'rgba(231,76,60,1)',
+                        borderColor: 'rgba(231,76,60,1)',
+                        borderWidth: 4,
+                        pointBorderColor: 'rgba(231,76,60,1)',
+                        pointHoverBorderColor: 'rgba(231,76,60,1)'
+      }
+    ]
             }
         }
         if ($scope.userID) {
@@ -73,7 +117,24 @@ angular.module('gamificationEngine.userStats', [])
                 data.graphsData.challenges.forEach(function (element, idx) {
                     $scope.chartsData.challenges.labels.push(element.status);
                     $scope.chartsData.challenges.data.push(element.number);
-                })
+                });
+
+                data.graphsData.actions.forEach(function (element, idx) {
+                    $scope.chartsData.actions.labels.push(element.name);
+                    $scope.chartsData.actions.data.push(element.matchs);
+                });
+
+                $scope.chartsData.badgesPoints.series.push('Badge');
+                $scope.chartsData.badgesPoints.series.push('Punti');
+                $scope.chartsData.badgesPoints.data.push([]);
+                $scope.chartsData.badgesPoints.data.push([]);
+                data.graphsData.timeBadges.forEach(function (element, idx) {
+                    $scope.chartsData.badgesPoints.labels.push(element.date);
+                    $scope.chartsData.badgesPoints.data[0].push(element.number);
+                });
+                data.graphsData.timePoints.forEach(function (element, idx) {
+                    $scope.chartsData.badgesPoints.data[1].push(element.number);
+                });
             });
         }
         $scope.showCharts = true;
