@@ -3,11 +3,11 @@
         <h1>Statistiche per: {{game.name}} <small>(id: {{game.id}})</small></h1>
     </div>
 </div>
-<div class="row">
+<div class="row v-center">
     <div class="col-md-2">
         <p><b>Seleziona periodo:</b></p>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-7">
         <select ng-model="period">
             <option value="today">Oggi</option>
             <option value="last-week">Ultima settimana</option>
@@ -15,6 +15,11 @@
             <option value="global">Globale</option>
             <option value="custom">Personalizzato</option>
         </select>
+    </div>
+    <div class="col-md-3">
+        <button class="btn btn-primary button-stats pull-right">
+            Esporta dati in formato CSV
+        </button>
     </div>
 </div>
 <div ng-if="period == 'custom'" class="row v-center">
