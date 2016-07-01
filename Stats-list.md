@@ -9,18 +9,15 @@ statistiche giocatore:
 - ricerca per tipo utente (team, default, etc etc) oppure per utente singolo
 - andamento delle giocate
 - distribuzione dei punti
-- andamento delle challenge assegnate
+- andamento delle challenge assegnate (DA FARE)
 * risultato delle challenge personali (superate, etc etc)
 * distribuzione delle azioni di gioco fatte
 * andamento assegnazione dei badge / punti
 
-
+statistiche gioco:
 * Numero totale di giocatori;
 * Numero di giocatori attivi; [almeno una giocata]
-* Data inizio, data fine, da quanto gioco dura
-...etc etc
-
-
+* Data inizio, data fine, da quanto gioco dura ...etc etc
 * grafico andamento numero dei giocatori totali
 * grafico andamento numero dei giocatori attivi
 * grafico numero di giocate per tipo azione
