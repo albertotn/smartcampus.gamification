@@ -15,6 +15,10 @@ angular.module('gamificationEngine.gameStats', [])
             labels: [],
             data: [],
             options: {
+                animation: {
+                    duration: 1000,
+                    easing: 'easeOutBack'
+                },
                 legend: {
                     display: true,
                     position: 'top'
