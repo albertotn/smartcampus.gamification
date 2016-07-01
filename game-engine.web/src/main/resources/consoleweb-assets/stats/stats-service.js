@@ -20,7 +20,18 @@ angular.module('gamificationEngine.statsServices', [])
         getUsersCategories: function (idGame) {
             var deferred = $q.defer();
 
-            $http.get('/stats/user-stats/users-category.json').success(function (data) {
+            $http.get('stats/user-stats/users-category.json').success(function (data) {
+                deferred.resolve(data);
+            }).error(
+                function (e) {
+                    deferred.reject(e);
+                });
+            return deferred.promise;
+        },
+        getCategoryStats: function (idCat) {
+            var deferred = $q.defer();
+
+            $http.get('stats/user-stats/category.json').success(function (data) {
                 deferred.resolve(data);
             }).error(
                 function (e) {

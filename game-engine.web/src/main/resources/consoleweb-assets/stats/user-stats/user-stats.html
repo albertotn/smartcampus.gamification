@@ -1,12 +1,7 @@
 <div class="row">
-    <div class="col-lg-12">
-        <h2>Statistiche di gioco degli utenti</h2>
-    </div>
-</div>
-<div class="row">
     <div class="col-md-6">
         <div class="form-group">
-            <label for="selectCategoryUsers">Seleziona la categoria:</label>
+            <label for="selectCategoryUsers">SELEZIONA LA CATEGORIA:</label>
             <select id="selectCategoryUsers" ng-model="usersCategory" class="form-control">
                 <option ng-repeat="cat in usersCategories">{{cat.name}}</option>
             </select>
@@ -14,7 +9,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            <label for="idUser">ID giocatore:</label>
+            <label for="idUser">ID GIOCATORE:</label>
             <input type="text" id="idUser" class="form-control" ng-model="userID" placeholder="ID giocatore (es. 45223)" />
         </div>
     </div>
@@ -24,5 +19,64 @@
         <button class="btn btn-block btn-primary button-stats" ng-click="searchStats()">
             <i class="glyphicon glyphicon-search"></i> &emsp; Mostra statistiche
         </button>
+    </div>
+</div>
+<div ng-show="showCharts">
+    <div class="row">
+        <div class="col-md-12">
+            <h4>STATISTICHE PER {{userID ? 'IL GIOCATORE ' + player.name : 'LA CATEGORIA ' + usersCategory}}</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="dash-panel">
+                <h5>Andamento dei giocatori per tempo</h5>
+                <div class="btn-group dash-button" uib-dropdown>
+                    <button id="matchsChartType" type="button" class="btn btn-default" uib-dropdown-toggle>
+                        <i class="glyphicon glyphicon-option-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="matchsChartType">
+                        <li role="menuitem"><a ng-click="chartsData.matchs.type = 'line'">Grafico a linea</a></li>
+                        <li role="menuitem"><a ng-click="chartsData.matchs.type = 'bar'">Grafico a barre</a></li>
+                    </ul>
+                </div>
+                <canvas height="100" class="chart-base" chart-type="chartsData.matchs.type" chart-data="chartsData.matchs.data" chart-labels="chartsData.matchs.labels" chart-colors="chartsData.matchs.colors" chart-series="chartsData.matchs.series" chart-options="chartsData.matchs.options">
+                </canvas>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="dash-panel">
+                <h5>Distribuzione dei punti per tipo</h5>
+                <div class="btn-group dash-button" uib-dropdown>
+                    <button id="pointsChartType" type="button" class="btn btn-default" uib-dropdown-toggle>
+                        <i class="glyphicon glyphicon-option-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="pointsChartType">
+                        <li role="menuitem"><a ng-click="chartsData.points.type = 'pie'">Grafico a torta</a></li>
+                        <li role="menuitem"><a ng-click="chartsData.points.type = 'bar'">Grafico a barre</a></li>
+                    </ul>
+                </div>
+                <canvas class="chart-base" chart-type="chartsData.points.type" chart-data="chartsData.points.data" chart-labels="chartsData.points.labels" chart-series="chartsData.points.series" chart-options="chartsData.points.options">
+                </canvas>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="dash-panel">
+                <h5>Distribuzione delle challenge</h5>
+                <div class="btn-group dash-button" uib-dropdown>
+                    <button id="challengesChartType" type="button" class="btn btn-default" uib-dropdown-toggle>
+                        <i class="glyphicon glyphicon-option-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="challengesChartType">
+                        <li role="menuitem"><a ng-click="chartsData.challenges.type = 'pie'">Grafico a torta</a></li>
+                        <li role="menuitem"><a ng-click="chartsData.challenges.type = 'bar'">Grafico a barre</a></li>
+                    </ul>
+                </div>
+                <canvas class="chart-base" chart-type="chartsData.challenges.type" chart-data="chartsData.challenges.data" chart-labels="chartsData.challenges.labels" chart-series="chartsData.challenges.series" chart-options="chartsData.challenges.options">
+                </canvas>
+            </div>
+        </div>
     </div>
 </div>

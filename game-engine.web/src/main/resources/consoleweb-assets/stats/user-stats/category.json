@@ -1,0 +1,71 @@
+{
+    "period": {
+        "from": "2016-06-25",
+        "to": "2016-06-30"
+    },
+    "graphsData": {
+        "matchs": [
+            {
+                "date": "2016-06-25",
+                "number": 30
+            },
+            {
+                "date": "2016-06-26",
+                "number": 0
+            },
+            {
+                "date": "2016-06-27",
+                "number": 5
+            },
+            {
+                "date": "2016-06-28",
+                "number": 23
+            },
+            {
+                "date": "2016-06-29",
+                "number": 15
+            },
+            {
+                "date": "2016-06-30",
+                "number": 8
+            }
+        ],
+        "points": [
+            {
+                "name": "Tipo punto 1",
+                "points": 345
+                },
+            {
+                "name": "Tipo punto 2",
+                "points": 100
+                },
+            {
+                "name": "Tipo punto 3",
+                "points": 500
+                },
+            {
+                "name": "Tipo punto 4",
+                "points": 50
+                },
+            {
+                "name": "Tipo punto 5",
+                "points": 505
+                }
+            ],
+        "challenges": [
+            {
+                "status": "Superate",
+                "number": 1890
+            },
+            {
+                "status": "Non superate",
+                "number": 756
+            },
+            {
+                "status": "Mai iniziate",
+                "number": 1500
+            }
+        ]
+
+    }
+}
