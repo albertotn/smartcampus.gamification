@@ -9,13 +9,16 @@ angular.module('gamificationEngine.statsServices', [])
             // Simulate the request to REST server
             var deferred = $q.defer();
 
-            $http.get('game-stats/stats.json').success(function (data) {
+            $http.get('/stats/game.json').success(function (data) {
                 deferred.resolve(data);
             }).error(
                 function (e) {
                     deferred.reject(e);
                 });
             return deferred.promise;
+        },
+        getUserStats: function (id) {
+
         }
     }
 });

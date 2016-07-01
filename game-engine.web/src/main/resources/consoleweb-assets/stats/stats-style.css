@@ -1,3 +1,40 @@
+/* Stats tab selection */
+
+.stats-tab {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.stats-tab > a {
+    font-size: 18px;
+    text-align: center;
+    color: rgb(23, 178, 235);
+}
+
+.stats-tab > a:hover {
+    color: rgb(23, 178, 235);
+}
+
+.stats-tab > a.active {
+    color: #fff;
+}
+
+.stats-tab > a > div {
+    padding-top: 10px;
+    padding-bottom: 6px;
+    border-bottom: 4px solid rgb(23, 178, 235);
+    transition: all 0.3s;
+}
+
+.stats-tab > a > div:hover {
+    background-color: rgb(23, 178, 235);
+    color: #fff;
+}
+
+.stats-tab > a.active > div {
+    background-color: rgb(23, 178, 235);
+}
+
 .v-center {
     display: flex;
     align-items: center

@@ -20,7 +20,9 @@ var app = angular.module('gamificationEngine', [
 	'gamificationEngine.actions',
 	'gamificationEngine.game',
 	'gamificationEngine.monitor',
-    'gamificationEngine.stats',
+    'gamificationEngine.menuStats',
+    'gamificationEngine.gameStats',
+    'gamificationEngine.userStats',
 	'gamificationEngine.home',
 	'gamificationEngine.login',
 	'gamificationEngine.rules',
@@ -67,12 +69,30 @@ var app = angular.module('gamificationEngine', [
             }
         })
 
-        .state('game-stats', {
-            url: '/game-stats/:id',
-            templateUrl: 'game-stats/game-stats.html',
+        .state('stats', {
+            url: '/stats/:id',
+            templateUrl: 'stats/menu.html',
             controller: 'StatsCtrl',
             data: {
                 page: 'stats'
+            }
+        })
+
+        .state('stats.game-stats', {
+            url: '/game-stats',
+            templateUrl: 'stats/game-stats/game-stats.html',
+            controller: 'GameStatsCtrl',
+            data: {
+                page: 'game-stats'
+            }
+        })
+
+        .state('stats.user-stats', {
+            url: '/user-stats',
+            templateUrl: 'stats/user-stats/user-stats.html',
+            controller: 'UserStatsCtrl',
+            data: {
+                page: 'user-stats'
             }
         })
 
