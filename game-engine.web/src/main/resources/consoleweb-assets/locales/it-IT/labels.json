@@ -74,5 +74,18 @@
   "tool_filter" : "filtra",
   "lbl_filter_ph" : "ID giocatore",
   "lbl_summary_score" : "Punteggio totale",
-  "lbl_summary_badge" : "Distintivi totali"
+  "lbl_summary_badge" : "Distintivi totali",
+  "lbl_challenges": "Challenges",
+  "title_add_challenge": "Aggiungi challenge",
+  "title_edit_challenge": "Modifica challenge",
+  "lbl_start": "Inizio",
+  "lbl_end": "Fine",
+  "lbl_bonus": "Bonus",
+  "lbl_challenge_type": "Tipo di challenge",
+  "lbl_list": "Lista",
+  "title_add_task": "Aggiungi classifica",
+  "title_edit_task": "Modifica classifica",
+  "tool_history": "cronologia",
+  "btn_close": "Chiudi",
+  "title_history": "Cronologia classifica"
 }
