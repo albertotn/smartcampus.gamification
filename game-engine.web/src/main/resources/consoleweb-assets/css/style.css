@@ -343,7 +343,43 @@ hr {
 .rule:before, .rule:after {
 	content: none;
 }
+#rule-filter {
+	padding: 20px 0;
+}
+#rule-filter  div.form-group {
+	margin-right: 40px;
+}
+#rule-filter h5 {
+	display: inline;
+}
 
+.rule .status {
+	float: left;
+	padding: 0;
+	margin: -5px 0 0;
+	height: 20px;
+	width: 80px;
+	text-align: center;
+	color: #fff;
+	font-size: 12px;
+	text-transform: uppercase;
+}
+.published {
+	background: rgb(34, 156, 143);
+}
+.draft {
+	background: rgb(248, 158, 34);
+}
+.rule .date {
+	padding: 0 15px;
+	margin: -5px 0 0;
+	float: right;
+	font-size: 12px;
+}
+.rule .status span, .rule .date span {
+	position: relative;
+	top: -3px;
+}
 /*
 	concepts
 */

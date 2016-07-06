@@ -7,20 +7,28 @@ angular.module('gamificationEngine.rules', [])
 
 		$scope.hideRule = true;
 		$scope.title = "labels:title_add_rule";
-		$scope.action = "labels:btn_publish";
 
-		$scope.ruleContent = '';
+		//$scope.ruleContent = '';
 		$scope.input = {};
 		$scope.alerts = {
 			'nameError': false,
 			'contentError': false,
 			'ruleError': '',
+			'draftError': '',
 			'ruleEdited': false
 		};
 		var previousName = '';
 
 		var rule;
 		var game = $scope.game;
+
+		function resetAlerts() {
+			$scope.alerts.nameError = false;
+			$scope.alerts.contentError = false;
+			$scope.alerts.ruleError = '';
+			$scope.alerts.ruleValidation = '';
+			$scope.alerts.draftError = '';
+		}
 		/*if (rule) {
 			gamesFactory.getRule(game, rule.id).then(
 				function (data) {
@@ -38,11 +46,8 @@ angular.module('gamificationEngine.rules', [])
 				});
 		}*/
 
-		$scope.save = function () {
-			$scope.alerts.nameError = false;
-			$scope.alerts.contentError = false;
-			$scope.alerts.ruleError = '';
-			$scope.alerts.ruleValidation = '';
+		$scope.saveRule = function (published) {
+			resetAlerts();
 			var valid = true;
 
 			if (!$scope.input.ruleContent || $scope.input.ruleContent.length == 0) {
@@ -53,6 +58,10 @@ angular.module('gamificationEngine.rules', [])
 				$scope.alerts.nameError = true;
 				valid = false;
 			}
+			/*if (!$scope.input.draftContent || $scope.input.draftContent.length == 0) {
+				$scope.alerts.draftError = true;
+				valid = false;
+			}*/
 
 			if (valid) {
 				//$scope.disabled = true;
@@ -67,21 +76,102 @@ angular.module('gamificationEngine.rules', [])
 					//}
 				}
 
-
 				if (!found) {
 					$scope.disabled = true;
 
 					var r = (rule) ? rule : {};
 					r.name = $scope.input.name;
-					r.content = $scope.input.ruleContent;
 
+					//r.published = published;
+					//r.lastUpdate = Date().getTime();
+					r.lastUpdate = Date.now(); // CHECK IF IS CORRECT
+					
+					var previousStatus = (rule) ? rule.published : false;
+					if (rule) {
+						if (previousStatus) {
+							r.published = true;
+						} else {
+							r.published = published;
+						}
+					} else {
+						r.published = published;
+					}
+
+
+					if (rule) {
+						console.log(previousStatus);
+						if (previousStatus) {
+							if (published) {
+								if (rule.draftContent && rule.draftContent != '') {
+									r.content = $scope.input.draftContent;
+									r.draftContent = '';
+								} else {
+									r.content = $scope.input.ruleContent;
+									r.draftContent = '';
+								}
+								//r.draftContent = $scope.input.draftContent;
+							} else {
+								if (!rule.draftContent || rule.draftContent == '') {
+									r.draftContent = $scope.input.ruleContent;
+								} else {
+									r.draftContent = $scope.input.draftContent;
+								}
+							}
+						} else {
+							if (published) {
+								console.log("hi");
+								r.content = $scope.input.ruleContent;
+								r.draftContent = '';
+							} else {
+								console.log("maybe here..");
+								//r.content = '';
+								r.draftContent = $scope.input.ruleContent;
+							}
+						}
+					} else {
+						if (published) {
+							r.content = $scope.input.ruleContent;
+						} else {
+							r.draftContent = $scope.input.ruleContent;
+						}
+					}
+					/*if (rule && !rule.published) {
+						if (published) {
+							r.content = $scope.input.draftContent;
+						} else {
+							r.draftContent = $scope.input.draftContent;
+						}
+					} else {
+						if (published) {
+							r.content = $scope.input.ruleContent;
+						} else {
+							r.draftContent = $scope.input.draftContent;
+						}
+					}*/
+
+					/*if (published) {
+						if (rule && !rule.published) {
+							r.content = $scope.input.draftContent;
+							r.draftContent = '';
+						} else {
+							r.content = $scope.input.ruleContent;
+							r.draftContent = '';
+						}
+					} else {
+						if (rule) {
+							r.draftContent = $scope.input.draftContent;
+						} else {
+							r.draftContent = $scope.input.ruleContent;
+						}
+					}*/
+
+					console.log(r);
 					if ($scope.input.name != 'constants') {
 						gamesFactory.validateRule($scope.input.ruleContent).then(function (data) {
 							if (data.length > 0) {
 								$scope.alerts.ruleValidation = data;
 								$scope.disabled = false;
-							}
-							else {
+							} else {
 								addRuleAPI(game, r);
 							}
 						}, function (msg) {
@@ -89,8 +179,7 @@ angular.module('gamificationEngine.rules', [])
 							$scope.alerts.ruleError = 'messages:' + msg;
 							$scope.disabled = false;
 						});
-					}
-					else {
+					} else {
 						addRuleAPI(game, r);
 					}
 				} else {
@@ -192,10 +281,7 @@ angular.module('gamificationEngine.rules', [])
 
 		$scope.cancel = function () {
 			$scope.list = true;
-			$scope.alerts.nameError = false;
-			$scope.alerts.contentError = false;
-			$scope.alerts.ruleError = '';
-			$scope.alerts.ruleValidation = '';
+			resetAlerts();
 		}
 
 		$scope.addRule = function () {
@@ -204,7 +290,6 @@ angular.module('gamificationEngine.rules', [])
 			$scope.alerts.ruleEdited = false;
 			$scope.list = false;
 			$scope.title = "labels:title_add_rule";
-			$scope.action = "labels:btn_publish";
 		}
 
 		$scope.editRule = function (editingRule) {
@@ -212,14 +297,17 @@ angular.module('gamificationEngine.rules', [])
 			$scope.alerts.ruleEdited = false;
 			$scope.list = false;
 			$scope.title = "labels:title_edit_rule";
-			$scope.action = "labels:btn_save";
 
 			//if (rule) {
 			gamesFactory.getRule(game, rule.id).then(
 				function (data) {
 					if (data) {
 						$scope.input.name = data.name;
-						$scope.input.ruleContent = data.content;
+						$scope.input.ruleContent = (data.published) ? data.content : data.draftContent;
+						$scope.input.draftContent = (data.published) ? data.draftContent : '';
+						$scope.input.published = data.published;
+						$scope.input.lastUpdate = data.lastUpdate;
+						$scope.input.status = (data.published) ? 'PUBLISHED' : 'DRAFT';
 
 						previousName = data.name;
 						//previousContent = data.content;
@@ -233,25 +321,35 @@ angular.module('gamificationEngine.rules', [])
 			//}
 		}
 
-		$scope.rules = [];
-	
-		$scope.showRule = function (index) {
-			var rule = game.rules[index];
-				gamesFactory.getRule(game, rule.id).then(
-					function (data) {
-						if (data) {
-							//$scope.ruleContent = data.content;
-							$scope.rules[index] = data.content;
+		$scope.convertDate = function (ts) {
+			var date = new Date(ts);
+			return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+		};
 
-							//previousName = data.name;
-							//previousContent = data.content;
-						}
-					},
-					function (message) {
-						// Show given error alert
-						$scope.rules[index] = '';
-						$scope.alerts.ruleError = 'messages:' + message;
-					});
+		$scope.rules = [];
+
+		$scope.showRule = function (index) {
+				var rule = game.rules[index];
+				if (rule.published) {
+					gamesFactory.getRule(game, rule.id).then(
+						function (data) {
+							if (data) {
+								//$scope.ruleContent = data.content;
+								$scope.rules[index] = data.content;
+
+								//previousName = data.name;
+								//previousContent = data.content;
+							}
+						},
+						function (message) {
+							// Show given error alert
+							$scope.rules[index] = '';
+							$scope.alerts.ruleError = 'messages:' + message;
+						});
+				} else {
+					// ---- TODO: DOWNLOAD DRAFT CONTENT FROM DB ---- //
+					$scope.rules[index] = rule.draftContent;
+				}
 			}
 			//Add action
 			/*$scope.openAddRuleModal = function () {
@@ -302,9 +400,24 @@ angular.module('gamificationEngine.rules', [])
 			});
 		};
 
+		$scope.search = 'all';
+		$scope.filterRules = function (rule) {
+			if ($scope.search == 'all' || (rule.published.toString() == $scope.search)) {
+				return rule;
+			}
+		}
+
+		$scope.searchText = '';
+		$scope.searchRules = function (rule) {
+			if (rule.name.indexOf($scope.searchText) > -1) {
+				return rule;
+			}
+		}
+
 		// Load game
 		gamesFactory.getGameById($stateParams.id).then(function (game) {
 			$scope.game = game;
+			console.log(game.rules);
 		}, function () {
 			// Show error alert
 			$scope.alerts.loadGameError = true;
