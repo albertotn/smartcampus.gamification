@@ -5,6 +5,7 @@ angular.module('gamificationEngine.tasks', [])
 
 		$scope.isCollapsed = true;
 		$scope.title = "labels:title_add_task";
+
 		var convertTask = function (task) {
 			// convert in taskDto
 			if (task.schedule) {
@@ -21,8 +22,19 @@ angular.module('gamificationEngine.tasks', [])
 			'cronError': false,
 			'pointsError': false,
 			'classError': false,
-			'rankEdited': false
+			'rankEdited': false,
+			'typeError': false
 		};
+
+		function resetAlerts() {
+			$scope.alerts.nameError = false;
+			$scope.alerts.pointsError = false;
+			$scope.alerts.classError = false;
+			$scope.alerts.cronError = false;
+			$scope.alerts.itemsError = false;
+			$scope.alerts.taskErr = false;
+			$scope.alerts.typeError = false;
+		}
 
 		var t = {};
 		$scope.input = {};
@@ -33,13 +45,31 @@ angular.module('gamificationEngine.tasks', [])
 		var task;
 		//$scope.game = game;
 
+		$scope.switchStatus = function (task) {
+			var t = angular.copy(task);
+			var previousStatus = task.status;
+			t.status = (previousStatus == 'active') ? 'pause' : 'active';
+
+			gamesFactory.editTask(game, t).then(function () {
+				var idx = -1;
+				for (var i = 0; i < game.classificationTask.length; i++) {
+					if (game.classificationTask[i].name === t.name) {
+						idx = i;
+						break;
+					}
+				}
+				if (idx > -1) {
+					game.classificationTask.splice(idx, 1, t);
+				}
+				$scope.alerts.rankEdited = true;
+			}, function (msg) {
+				$scope.alerts.taskErr = 'messages:' + msg;
+			});
+
+		};
+
 		$scope.save = function () {
-			$scope.alerts.nameError = false;
-			$scope.alerts.pointsError = false;
-			$scope.alerts.classError = false;
-			$scope.alerts.cronError = false;
-			$scope.alerts.itemsError = false;
-			$scope.alerts.taskErr = false;
+			resetAlerts();
 
 			//var valid = $scope.input.name && $scope.input.itemType && $scope.input.classificationName && $scope.input.schedule && $scope.input.itemToNotificate;
 			var valid = true;
@@ -63,6 +93,10 @@ angular.module('gamificationEngine.tasks', [])
 				$scope.alerts.itemsError = true;
 				valid = false;
 			}
+			if (!$scope.input.type) {
+				$scope.alerts.typeError = true;
+				valid = false;
+			}
 
 			if (valid) {
 				$scope.disabled = true;
@@ -71,6 +105,8 @@ angular.module('gamificationEngine.tasks', [])
 				t.classificationName = $scope.input.classificationName;
 				t.cronExpression = $scope.input.schedule;
 				t.itemsToNotificate = $scope.input.itemToNotificate;
+				//t.type = $scope.input.type; //REMOVE COMMENT
+				//t.status = 'active'; //REMOVE COMMENT
 
 				if (!task) {
 					var found = false;
@@ -84,6 +120,10 @@ angular.module('gamificationEngine.tasks', [])
 							if (!game.classificationTask) {
 								game.classificationTask = [];
 							}
+
+							data.type = $scope.input.type; //ONLY FOR DEBUG
+							data.status = 'active'; //ONLY FOR DEBUG
+
 							//game.classificationTask.push(data);
 							game.classificationTask.unshift(data);
 							//$uibModalInstance.close();
@@ -128,12 +168,7 @@ angular.module('gamificationEngine.tasks', [])
 		};
 
 		$scope.cancel = function () {
-			$scope.alerts.nameError = false;
-			$scope.alerts.pointsError = false;
-			$scope.alerts.classError = false;
-			$scope.alerts.cronError = false;
-			$scope.alerts.itemsError = false;
-			$scope.alerts.taskErr = false;
+			resetAlerts();
 			$scope.isCollapsed = true;
 		};
 
@@ -154,10 +189,32 @@ angular.module('gamificationEngine.tasks', [])
 			$scope.input.classificationName = task.classificationName;
 			$scope.input.schedule = task.schedule ? task.schedule.cronExpression : task.cronExpression;
 			$scope.input.itemToNotificate = task.itemsToNotificate;
+			//$scope.input.type = task.type; // REMOVE COMMENT
 
 			$scope.edit = true;
 			$scope.isCollapsed = false;
 			$scope.alerts.rankEdited = false;
+		};
+
+		$scope.search = 'all';
+		$scope.filterTasks = function (task) {
+			if (!task.type) task.type = '';
+			if ($scope.search == 'all' || task.type.indexOf($scope.search) > -1) {
+				return task;
+			}
+		};
+
+		$scope.generateCron = function () {
+			var modalInstance = $uibModal.open({
+				templateUrl: 'tasks/cron_generator.html',
+				controller: 'CronGeneratorCtrl',
+				backdrop: 'static',
+				size: 'md'
+			});
+
+			modalInstance.result.then(function (cron) {
+				$scope.input.schedule = cron;
+			});
 		};
 		/*$scope.openAddTaskModal = function () {
 			var modalInstance = $uibModal.open({
@@ -305,38 +362,74 @@ modals
 	})*/
 // Delete task modal
 	.controller('DeleteTaskModalInstanceCtrl', function ($scope, $uibModalInstance, task, game, gamesFactory) {
-	$scope.argument = task.name;
+		$scope.argument = task.name;
 
-	$scope.alerts = {
-		'deleteError': false,
-	};
-	// DELETE button click event-handler
-	$scope.delete = function () {
-		if (game.classificationTask) {
-			var idx = -1;
-			for (var i = 0; i < game.classificationTask.length; i++) {
-				if (game.classificationTask[i].name === task.name) {
-					idx = i;
-					break;
+		$scope.alerts = {
+			'deleteError': false,
+		};
+		// DELETE button click event-handler
+		$scope.delete = function () {
+			if (game.classificationTask) {
+				var idx = -1;
+				for (var i = 0; i < game.classificationTask.length; i++) {
+					if (game.classificationTask[i].name === task.name) {
+						idx = i;
+						break;
+					}
 				}
 			}
+
+			gamesFactory.deleteTask(game, task).then(
+				function () {
+					$uibModalInstance.close();
+					if (idx > -1) {
+						game.classificationTask.splice(idx, 1);
+					}
+				},
+				function (message) {
+					$scope.alerts.deleteError = true;
+				}
+			);
+		};
+
+		// CANCEL button click event-handler
+		$scope.cancel = function () {
+			$uibModalInstance.dismiss('cancel');
+		};
+	})
+	.controller('CronGeneratorCtrl', function ($scope, $uibModalInstance) {
+		//$scope.section = 'minute';
+		$scope.options = {
+			allowMultiple: true
 		}
 
-		gamesFactory.deleteTask(game, task).then(
-			function () {
-				$uibModalInstance.close();
-				if (idx > -1) {
-					game.classificationTask.splice(idx, 1);
-				}
-			},
-			function (message) {
-				$scope.alerts.deleteError = true;
-			}
-		);
-	};
 
-	// CANCEL button click event-handler
-	$scope.cancel = function () {
-		$uibModalInstance.dismiss('cancel');
-	};
-});
+		$scope.selectDay = function (days, day) {
+			if (!days.dayValue) {
+				days.dayValue = [];
+			}
+			if (days.dayValue.indexOf(day) >= 0) {
+				days.dayValue.splice(days.dayValue.indexOf(day), 1);
+			} else {
+				days.dayValue.push(day);
+			}
+			console.log(days.dayValue);
+		};
+
+		$scope.generate = function () {
+				console.log($scope.cron);
+				$uibModalInstance.close($scope.cron);
+			}
+			// CANCEL button click event-handler
+		$scope.cancel = function () {
+			$uibModalInstance.dismiss('cancel');
+		}
+
+		/*$scope.range = function (n) {
+			var a = [];
+			for (var i = 0; i < n; i++) {
+				a.push(i);
+			}
+			return a;
+		}*/
+	});

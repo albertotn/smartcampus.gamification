@@ -437,3 +437,45 @@ hr {
 	width: 99%;
 	opacity: 1;
 }
+
+/*
+	classifications
+*/
+#classification-filter {
+	padding: 20px;
+}
+#classification-filter h5 {
+	display: inline;
+}
+.task .type {
+	float: left;
+	padding: 0 10px;
+	margin: -5px 0 0;
+	height: 20px;
+	width: 100px;
+	text-align: center;
+	color: #fff;
+	font-size: 12px;
+	text-transform: uppercase;
+}
+.general {
+	background: rgb(248, 158, 34);
+}
+.incremental {
+	background: rgb(34, 156, 143);
+}
+.task .status {
+	padding: 0 15px;
+	margin: -5px 0 0;
+	float: right;
+	font-size: 12px;
+}
+.task .type span, .task .status span {
+	position: relative;
+	top: -3px;
+}
+.task:before, .task:after {
+	content: none;
+}
+
+}
