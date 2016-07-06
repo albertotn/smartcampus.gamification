@@ -478,4 +478,74 @@ hr {
 	content: none;
 }
 
+#cron-gen {
+	position: absolute;
+	padding-right: 15px;
+	right: 0;
+	font-size: 13px;
+	cursor: pointer;
+	color: rgb(65, 169, 246);
+}
+
+/* 
+	cron
+*/
+#cron-form {
+	padding: 0 25px;
+}
+#cron-form #sections button{
+	margin: 5px 10px;
+	width: 100%;
+	background: #fff;
+	border: 1px solid rgb(159, 159, 159);
+	color: rgb(159, 159, 159);
+	font-weight: bolder;
+}
+#cron-form #sections button.active {
+	color: #fff;
+	background: rgb(65, 169, 246);
+}
+#cron-form span {
+	font-size: 16px;
+	padding: 5px;
+	font-weight: bolder;
+}
+/*#cron {
+	padding: 15px;
+}
+#cron input {
+	width: 100px;
+	display: inline;
+}*/
+#cron-form .wrapper {
+	padding: 15px;
+}
+#cron-form form {
+	margin: 10px;
+}
+
+/*
+	select style
+*/
+div.select {
+	display: inline-block;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+	min-width: 60px;
+    border-radius: 3px;
+    overflow: hidden;
+    background-color: #fff;
+    background: #fff url("http://www.scottgood.com/jsg/blog.nsf/images/arrowdown.gif") no-repeat 95% 50%;
+}
+
+div.select select {
+    padding: 5px 8px;
+	width: 100%;
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
 }

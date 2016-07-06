@@ -32,6 +32,7 @@ var app = angular.module('gamificationEngine', [
 	'ngAnimate',
 	'ui.bootstrap',
 	'jm.i18next',
+	'angular-cron-jobs',
 	//'toggle-switch',
 	'ui.bootstrap.datetimepicker'
 ])

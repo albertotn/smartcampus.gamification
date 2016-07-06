@@ -1,0 +1,19 @@
+<div class="modal-header">
+	<h3 class="modal-title">{{'labels:title_generate_cron' | i18next}}</h3>
+</div>
+<form role="form" name="cronForm" id="cron-form">
+	<div class="modal-body">
+		<div class="row">
+			<div class="col-md-12">
+				<cron-selection output="cron" config="options" template="tasks/cron-template.html"></cron-selection>
+				<!--<cron-selection output="cron" config="options"></cron-selection>-->
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer clearfix">
+		<div class="text-center">
+			<button type="submit" class="btn btn-success" data-ng-click="generate()" ng-disabled="disabled">{{'labels:btn_generate' | i18next}}</button>
+			<button type="reset" class="btn btn-danger" data-ng-click="cancel()" ng-disabled="disabled">{{'labels:btn_cancel' | i18next}}</button>
+		</div>
+	</div>
+</form>

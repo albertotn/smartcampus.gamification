@@ -1,0 +1,245 @@
+<div>
+	<div id="sections">
+		<div class="row text-center">
+			<div class="col-md-4">
+				<button class="btn" ng-click="myFrequency.base = 1" ng-class="{'active': !myFrequency || myFrequency.base == 1}">Minutes</button>
+			</div>
+			<div class="col-md-4">
+				<button class="btn" ng-click="myFrequency.base = 2" ng-class="{'active': myFrequency.base == 2}">Hourly</button>
+			</div>
+			<div class="col-md-4">
+				<button class="btn" ng-click="myFrequency.base = 3" ng-class="{'active': myFrequency.base == 3}">Daily</button>
+			</div>
+		</div>
+		<div class="row text-center">
+			<div class="col-md-4">
+				<button class="btn" ng-click="myFrequency.base = 4" ng-class="{'active': myFrequency.base == 4}">Weekly</button>
+			</div>
+			<div class="col-md-4">
+				<button class="btn" ng-click="myFrequency.base = 5" ng-class="{'active': myFrequency.base == 5}">Monthly</button>
+			</div>
+			<div class="col-md-4">
+				<button class="btn" ng-click="myFrequency.base = 6" ng-class="{'active': myFrequency.base == 6}">Yearly</button>
+			</div>
+		</div>
+	</div>
+	<hr/>
+	<!--<div class="cron-select-wrap">
+		<select class="cron-select" ng-model="myFrequency.base" ng-options="item.value as item.label for item in frequency"></select>
+	</div>-->
+	<div class="row">
+		<div class="col-md-12">
+			<div class="wrapper" ng-if="!myFrequency || myFrequency.base == 1">
+				<form class="form-inline">
+					<div class="form-group">
+						<span>Every minute</span>
+						<!--<select class="form-control" ng-model="myFrequency.minuteValue">
+							<option ng-repeat="m in $parent.range(60)" value="{{m}}">{{m}}</option>
+						</select>-->
+					</div>
+				</form>
+			</div>
+			<div class="wrapper" ng-if="myFrequency.base == 2">
+				<form class="form-inline">
+					<div class="form-group">
+						<span>Every hour</span>
+						<!--<select class="cron-select" ng-model="myFrequency.hourValue">
+							<option ng-repeat="h in $parent.range(24)" value="{{h}}">{{h}}</option>
+						</select>-->
+					</div>
+				</form>
+				<form class="form-inline">
+					<div class="form-group">
+						<span>Starts at</span>
+						<div class="select">
+							<select ng-model="myFrequency.minuteValue">
+								<option ng-repeat="m in minuteValue" value="{{m}}">{{m}}</option>
+							</select>
+						</div>
+						<span>minute(s)</span>
+					</div>
+				</form>
+			</div>
+			<div class="wrapper" ng-if="myFrequency.base == 3">
+				<form class="form-inline">
+					<div class="form-group">
+						<span>Every day</span>
+					</div>
+				</form>
+				<form class="form-inline">
+					<div class="form-group">
+						<span>Starts at</span>
+						<div class="select">
+							<select ng-model="myFrequency.hourValue">
+								<option ng-repeat="h in hourValue" value="{{h}}">{{h}}</option>
+							</select>
+						</div>
+						<span>:</span>
+						<div class="select">
+							<select ng-model="myFrequency.minuteValue">
+								<option ng-repeat="m in minuteValue" value="{{m}}">{{m}}</option>
+							</select>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="wrapper" ng-show="myFrequency.base == 4">
+				<!--<span>Every week on </span>-->
+				<!--<select class="form-control" ng-model="myFrequency.dayOfMonthValue">
+							<option value="1">Monday</option>
+							<option value="2">Tuesday</option>
+							<option value="3">Wednesday</option>
+							<option value="4">Thursday</option>
+							<option value="5">Friday</option>
+							<option value="6">Saturday</option>
+							<option value="7">Sunday</option>
+						</select>-->
+				<form>
+					<div class="form-group">
+						<label class="checkbox-inline">
+							<input type="checkbox" ng-click="$parent.selectDay(myFrequency, 1)">
+							<span>Monday</span>
+						</label>
+						<label class="checkbox-inline">
+							<input type="checkbox" ng-click="$parent.selectDay(myFrequency, 2)">
+							<span>Tuesday</span>
+						</label>
+						<label class="checkbox-inline">
+							<input type="checkbox" ng-click="$parent.selectDay(myFrequency, 3)">
+							<span>Wednesday</span>
+						</label>
+					</div>
+				</form>
+				<form>
+					<div class="form-group">
+						<label class="checkbox-inline">
+							<input type="checkbox" ng-click="$parent.selectDay(myFrequency, 4)">
+							<span>Thursday</span>
+						</label>
+						<label class="checkbox-inline">
+							<input type="checkbox" ng-click="$parent.selectDay(myFrequency, 5)">
+							<span>Friday</span>
+						</label>
+						<label class="checkbox-inline">
+							<input type="checkbox" ng-click="$parent.selectDay(myFrequency, 6)">
+							<span>Saturday</span>
+						</label>
+					</div>
+				</form>
+				<form>
+					<div class="form-group">
+						<label class="checkbox-inline">
+							<input type="checkbox" ng-click="$parent.selectDay(myFrequency, 0)">
+							<span>Sunday</span>
+						</label>
+					</div>
+				</form>
+				<form class="form-inline">
+					<div class="form-group">
+						<span>Starts at</span>
+						<div class="select">
+							<select ng-model="myFrequency.hourValue">
+								<option ng-repeat="h in hourValue" value="{{h}}">{{h}}</option>
+							</select>
+						</div>
+						<span>:</span>
+						<div class="select">
+							<select ng-model="myFrequency.minuteValue">
+								<option ng-repeat="m in minuteValue" value="{{m}}">{{m}}</option>
+							</select>
+						</div>
+					</div>
+				</form>
+				<!--<div class="day-block" ng-class="{'active': myFrequency.dayValue.indexOf(0) >= 0}" ng-click="$parent.selectDay(0)"> Sun. </div>
+				<div class="day-block" ng-class="{'active': myFrequency.dayValue.indexOf(1) >= 0}" ng-click="$parent.selectDay(1)"> Mon. </div>
+				<div class="day-block" ng-class="{'active': myFrequency.dayValue.indexOf(2) >= 0}" ng-click="$parent.selectDay(2)"> Tues. </div>
+				<div class="day-block" ng-class="{'active': myFrequency.dayValue.indexOf(3) >= 0}" ng-click="$parent.selectDay(3)"> Wed. </div>
+				<div class="day-block" ng-class="{'active': myFrequency.dayValue.indexOf(4) >= 0}" ng-click="$parent.selectDay(4)"> Thur. </div>
+				<div class="day-block" ng-class="{'active': myFrequency.dayValue.indexOf(5) >= 0}" ng-click="$parent.selectDay(5)"> Fri. </div>
+				<div class="day-block" ng-class="{'active': myFrequency.dayValue.indexOf(6) >= 0}" ng-click="$parent.selectDay(6)"> Sat. </div>-->
+			</div>
+			<div class="wrapper" ng-if="myFrequency.base == 5">
+				<!--<form class="form-inline">
+					<div class="form-group">
+						<span>Every month</span>
+					</div>
+				</form>-->
+				<form class="form-inline">
+					<div class="form-group">
+						<span>Day</span>
+						<div class="select">
+							<select ng-model="myFrequency.dayOfMonthValue">
+								<option ng-repeat="d in dayOfMonthValue" value="{{d}}">{{d}}</option>
+							</select>
+						</div>
+					</div>
+				</form>
+				<form class="form-inline">
+					<div class="form-group">
+						<span>Starts at</span>
+						<div class="select">
+							<select ng-model="myFrequency.hourValue">
+								<option ng-repeat="h in hourValue" value="{{h}}">{{h}}</option>
+							</select>
+						</div>
+						<span>:</span>
+						<div class="select">
+							<select ng-model="myFrequency.minuteValue">
+								<option ng-repeat="m in minuteValue" value="{{m}}">{{m}}</option>
+							</select>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="wrapper" ng-if="myFrequency.base == 6">
+				<!--<form class="form-inline">
+					<div class="form-group">
+						<span>Every year</span>
+					</div>
+				</form>-->
+				<form class="form-inline">
+					<span>Every</span>
+					<div class="form-group">
+						<div class="select">
+							<select ng-model="myFrequency.monthValue">
+								<option value="1">January</option>
+								<option value="2">February</option>
+								<option value="3">March</option>
+								<option value="4">April</option>
+								<option value="5">May</option>
+								<option value="6">June</option>
+								<option value="7">July</option>
+								<option value="8">August</option>
+								<option value="9">September</option>
+								<option value="10">October</option>
+								<option value="11">November</option>
+								<option value="12">December</option>
+							</select>
+						</div>
+						<div class="select">
+							<select ng-model="myFrequency.dayOfMonthValue">
+								<option ng-repeat="d in dayOfMonthValue" value="{{d}}">{{d}}</option>
+							</select>
+						</div>
+					</div>
+				</form>
+				<form class="form-inline">
+					<div class="form-group">
+						<span>Starts at</span>
+						<div class="select">
+							<select ng-model="myFrequency.hourValue">
+								<option ng-repeat="h in hourValue" value="{{h}}">{{h}}</option>
+							</select>
+						</div>
+						<span>:</span>
+						<div class="select">
+							<select ng-model="myFrequency.minuteValue">
+								<option ng-repeat="m in minuteValue" value="{{m}}">{{m}}</option>
+							</select>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
