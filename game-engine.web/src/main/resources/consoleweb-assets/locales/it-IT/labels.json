@@ -74,5 +74,13 @@
   "tool_filter" : "filtra",
   "lbl_filter_ph" : "ID giocatore",
   "lbl_summary_score" : "Punteggio totale",
-  "lbl_summary_badge" : "Distintivi totali"
+  "lbl_summary_badge" : "Distintivi totali",
+  "title_add_rule": "Aggiungi una nuova regola",
+  "title_edit_rule": "Modifica regola",
+  "lbl_rule_draft": "Bozza",
+  "btn_publish" : "Pubblica",
+  "btn_draft": "Salva come bozza",
+  "lbl_add_rule": "Aggiungi regola",
+  "title_add_task": "Aggiungi una nuova classifica",
+  "btn_generate": "Genera"
 }
