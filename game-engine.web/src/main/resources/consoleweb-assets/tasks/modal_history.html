@@ -8,13 +8,13 @@
 			<table class="table table-history">
 				<tbody>
 					<tr>
-						<th>Date</th>
-						<th>Status</th>
-						<th style="width:50%">Error name</th>
+						<th>{{'labels:lbl_date' | i18next}}</th>
+						<th>{{'labels:lbl_status' | i18next}}</th>
+						<th style="width:50%">{{'labels:lbl_error' | i18next }}</th>
 					</tr>
 					<tr data-ng-repeat="event in history">
 						<td>{{event.date}}</td>
-						<td ng-class="{'completed': event.success, 'failed': !event.success}">{{(event.success) ? 'Completed' : 'Failed'}}</td>
+						<td ng-class="{'completed': event.success, 'failed': !event.success}">{{((event.success) ? 'labels:lbl_completed' : 'labels:lbl_failed') | i18next}}</td>
 						<td style="width:50%">{{event.error}}</td>
 					</tr>
 				</tbody>

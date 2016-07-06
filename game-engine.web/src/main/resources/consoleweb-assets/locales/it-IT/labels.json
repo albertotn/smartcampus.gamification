@@ -81,11 +81,17 @@
   "lbl_start": "Inizio",
   "lbl_end": "Fine",
   "lbl_bonus": "Bonus",
+  "lbl_number": "Inserisci un numero",
   "lbl_challenge_type": "Tipo di challenge",
   "lbl_list": "Lista",
   "title_add_task": "Aggiungi classifica",
   "title_edit_task": "Modifica classifica",
   "tool_history": "cronologia",
   "btn_close": "Chiudi",
-  "title_history": "Cronologia classifica"
+  "title_history": "Cronologia classifica",
+  "lbl_date": "Data",
+  "lbl_status": "Stato",
+  "lbl_error": "Nome errore",
+  "lbl_completed": "Completato",
+  "lbl_failed": "Fallito"
 }
