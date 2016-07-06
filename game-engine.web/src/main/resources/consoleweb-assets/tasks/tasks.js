@@ -208,6 +208,22 @@ angular.module('gamificationEngine.tasks', [])
 			});
 		};
 
+		$scope.showHistory = function (task) {
+			var modalInstance = $uibModal.open({
+				templateUrl: 'tasks/modal_history.html',
+				controller: 'HistoryModalInstanceCtrl',
+				backdrop: "static",
+				resolve: {
+					gameId : function () {
+						return $scope.game.id;	
+					},
+					task: function () {
+						return task;
+					}
+				}
+			});
+		};
+
 		// Load game
 		gamesFactory.getGameById($stateParams.id).then(function (game) {
 			$scope.game = game;
@@ -305,38 +321,99 @@ modals
 	})*/
 // Delete task modal
 	.controller('DeleteTaskModalInstanceCtrl', function ($scope, $uibModalInstance, task, game, gamesFactory) {
-	$scope.argument = task.name;
+		$scope.argument = task.name;
 
-	$scope.alerts = {
-		'deleteError': false,
-	};
-	// DELETE button click event-handler
-	$scope.delete = function () {
-		if (game.classificationTask) {
-			var idx = -1;
-			for (var i = 0; i < game.classificationTask.length; i++) {
-				if (game.classificationTask[i].name === task.name) {
-					idx = i;
-					break;
+		$scope.alerts = {
+			'deleteError': false,
+		};
+		// DELETE button click event-handler
+		$scope.delete = function () {
+			if (game.classificationTask) {
+				var idx = -1;
+				for (var i = 0; i < game.classificationTask.length; i++) {
+					if (game.classificationTask[i].name === task.name) {
+						idx = i;
+						break;
+					}
 				}
 			}
-		}
 
-		gamesFactory.deleteTask(game, task).then(
-			function () {
-				$uibModalInstance.close();
-				if (idx > -1) {
-					game.classificationTask.splice(idx, 1);
+			gamesFactory.deleteTask(game, task).then(
+				function () {
+					$uibModalInstance.close();
+					if (idx > -1) {
+						game.classificationTask.splice(idx, 1);
+					}
+				},
+				function (message) {
+					$scope.alerts.deleteError = true;
 				}
+			);
+		};
+
+		// CANCEL button click event-handler
+		$scope.cancel = function () {
+			$uibModalInstance.dismiss('cancel');
+		};
+	})
+	.controller('HistoryModalInstanceCtrl', function ($scope, $uibModalInstance, gameId, task, gamesFactory) {
+		$scope.alerts = {
+			'historyErr': false
+		};
+		$scope.task = task;
+	
+		// DEBUG
+		$scope.history = [
+			{
+				'date': '22/06/2016',
+				'success': true,
+				'error': ''
 			},
-			function (message) {
-				$scope.alerts.deleteError = true;
+			{
+				'date': '22/06/2016',
+				'success': false,
+				'error': 'Error'
+			},
+			{
+				'date': '22/06/2016',
+				'success': true,
+				'error': ''
 			}
-		);
-	};
+		];
+		// END DEBUG
 
-	// CANCEL button click event-handler
-	$scope.cancel = function () {
-		$uibModalInstance.dismiss('cancel');
-	};
-});
+		gamesFactory.getHistory(gameId, task.name).then(function (data) {
+			$scope.history = data;
+		}, function () {
+			$scope.alerts.historyErr = true;
+		});
+		// DELETE button click event-handler
+		/*$scope.delete = function () {
+			if (game.classificationTask) {
+				var idx = -1;
+				for (var i = 0; i < game.classificationTask.length; i++) {
+					if (game.classificationTask[i].name === task.name) {
+						idx = i;
+						break;
+					}
+				}
+			}
+
+			gamesFactory.deleteTask(game, task).then(
+				function () {
+					$uibModalInstance.close();
+					if (idx > -1) {
+						game.classificationTask.splice(idx, 1);
+					}
+				},
+				function (message) {
+					$scope.alerts.deleteError = true;
+				}
+			);
+		};*/
+
+		// CANCEL button click event-handler
+		$scope.close = function () {
+			$uibModalInstance.dismiss('cancel');
+		};
+	});

@@ -1,0 +1,24 @@
+<div class="history-modal">
+	<div class="modal-header">
+		<h4 class="modal-title" style="display:inline">{{'labels:title_history' | i18next}} &lt;{{task.name}}&gt;</h4>
+		<button type="submit" class="btn btn-primary pull-right" data-ng-click="close()">{{'labels:btn_close' | i18next}}</button>
+	</div>
+	<div class="row vertical-spacing">
+		<div class="col-md-12">
+			<table class="table table-history">
+				<tbody>
+					<tr>
+						<th>Date</th>
+						<th>Status</th>
+						<th style="width:50%">Error name</th>
+					</tr>
+					<tr data-ng-repeat="event in history">
+						<td>{{event.date}}</td>
+						<td ng-class="{'completed': event.success, 'failed': !event.success}">{{(event.success) ? 'Completed' : 'Failed'}}</td>
+						<td style="width:50%">{{event.error}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

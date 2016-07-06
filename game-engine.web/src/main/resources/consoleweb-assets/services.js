@@ -180,6 +180,19 @@ angular.module('gamificationEngine.services', [])
 
 			return deferred.promise;
 		}
+		
+		var getHistory = function (gameId, name){
+			var deferred = $q.defer();
+			$http.get(url + '/console/game/' + gameId + "/task/history/" + name)
+			.success(function (data) {
+				deferred.resolve(data);
+			})
+			.error(function () {
+				deferred.reject();
+			});
+			
+			return deferred.promise;
+		}
 
 		var saveGame = function (game) {
 			var deferred = $q.defer();
@@ -407,6 +420,7 @@ angular.module('gamificationEngine.services', [])
 			'addTask': addTask,
 			'deleteTask': deleteTask,
 			'editTask': editTask,
+			'getHistory': getHistory,
 			'validateRule': validateRule,
 			'getPlayersState': getPlayersState,
 		};

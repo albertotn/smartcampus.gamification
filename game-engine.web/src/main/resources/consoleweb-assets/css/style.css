@@ -78,6 +78,15 @@ button.btn-default.btn-edit {
 button.btn-default.btn-edit:focus {
 	outline: none;
 }
+button.btn-history {
+	background: rgb(136,35,132) !important;
+}
+button.btn-history img {
+	position:  relative;
+	top: -4px;
+	left: -2px;
+	width: 75%;
+}
 
 /*.panel-actions {
 	min-height: 290px;
@@ -400,4 +409,21 @@ hr {
 .horizontalCollapse.in {
 	width: 99%;
 	opacity: 1;
+}
+
+.history-modal .modal-header {
+	border: 0 !important;
+}
+.history-modal {
+	padding: 0 20px;
+}
+.history-modal .table-history th {
+	border-top: 0;
+	border-bottom: 2px solid rgb(117,117,117);
+}
+.table-history td.completed {
+	color: rgb(67,165,71);
+}
+.table-history td.failed {
+	color: rgb(191,35,36);
 }
