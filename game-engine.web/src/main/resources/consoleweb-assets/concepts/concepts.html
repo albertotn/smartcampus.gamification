@@ -101,19 +101,113 @@
 				</div>
 			</uib-tab>
 			<uib-tab heading="{{'labels:lbl_challenges' | i18next}}">
-				<div class="table-actions">
-					<!--<table class="table table-striped table-bordered">
-						<tbody>
-							<tr data-ng-repeat="point in game.pointConcept">
-								<td>
-									{{point.name}}
-									<button type="button" class="btn btn-danger btn-circle pull-right" data-ng-click="deleteConcept(point,'point')" uib-tooltip="{{'labels:tool_delete' | i18next}}">
-										<span class="glyphicon glyphicon-remove"></span>
-									</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>-->
+				<div class="table-actions col-md-12">
+					<div class="row top-margined">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<uib-alert ng-if="!!alerts.challengeEdited" type="success" close="alerts.challengeEdited = false">{{'messages:msg_challenge_edited' | i18next}}</uib-alert>
+							</div>
+						</div>
+						<div uib-collapse="isCollapsed" class="col-md-12">
+							<h4>{{title | i18next}}</h4>
+							<form role="form" name="challengeForm">
+								<div class="modal-body">
+									<div class="row">
+										<div class="col-md-12 text-center">
+											<uib-alert ng-if="!!alerts.challengeError" type="danger">{{alerts.challengeError | i18next}}</uib-alert>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6 text-center">
+											<uib-alert ng-if="!!alerts.startError" type="danger">{{'messages:msg_invalid_time' | i18next}}</uib-alert>
+										</div>
+										<div class="col-md-6 text-center">
+											<uib-alert ng-if="!!alerts.bonusError" type="danger">{{'messages:msg_empty_fields' | i18next}}</uib-alert>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6 form-group" ng-class="{'has-error': alerts.startError}">
+											<label for="start">{{'labels:lbl_start' | i18next}}</label><br/>
+											<datetimepicker placeholder="mm/dd/yyyy" ng-model="input.start" show-meridian="showMeridian" date-format="dd-MMM-yyyy"></datetimepicker>
+										</div>
+										<div class="col-md-6 form-group" ng-class="{'has-error': alerts.bonusError}">
+											<label for="bonus">{{'labels:lbl_bonus' | i18next}}</label>
+											<input type="text" class="form-control" name="bonus" id="bonus" data-ng-model="input.bonus" placeholder="{{'labels:lbl_number' | i18next}}" data-ng-pattern="/^\d+$/" required/>
+											<uib-alert type="danger" data-ng-show="challengeForm.bonus.$error.pattern">{{'messages:msg_error_integer' | i18next}}</uib-alert>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6 text-center">
+											<uib-alert ng-if="!!alerts.endError" type="danger">{{'messages:msg_invalid_time' | i18next}}</uib-alert>
+										</div>
+										<div class="col-md-6 text-center">
+											<uib-alert ng-if="!!alerts.typeError" type="danger">{{'messages:msg_empty_fields' | i18next}}</uib-alert>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6 form-group" ng-class="{'has-error': alerts.endError}">
+											<label for="end">{{'labels:lbl_end' | i18next}}</label><br/>
+											<datetimepicker placeholder="mm/dd/yyyy" ng-model="input.end" show-meridian="showMeridian" date-format="dd-MMM-yyyy"></datetimepicker>
+										</div>
+										<div class="col-md-6 form-group" ng-class="{'has-error': alerts.typeError}">
+											<label for="challengeType">{{'labels:lbl_challenge_type' | i18next}}</label>
+											<div class="select" style="width:100% !important">
+												<select id="challengeType" class="form-control" data-ng-model="input.challengeType" required></select>
+											</div>
+											<!--data-ng-options="point.name as point.name for point in game.pointConcept"-->
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6 text-center">
+											<uib-alert ng-if="!!alerts.pointsError" type="danger">{{'messages:msg_empty_fields' | i18next}}</uib-alert>
+										</div>
+										<div class="col-md-6 text-center">
+											<uib-alert ng-if="!!alerts.listError" type="danger">{{'messages:msg_empty_fields' | i18next}}</uib-alert>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6 form-group" ng-class="{'has-error': alerts.pointsError}">
+											<label for="points">{{'labels:lbl_task_itemType' | i18next}}</label>
+											<div class="select" style="width:100% !important">
+												<select id="points" class="form-control" data-ng-model="input.points" required></select>
+											</div>
+										</div>
+										<div class="col-md-6 form-group" ng-class="{'has-error': alerts.listError}">
+											<label for="list">{{'labels:lbl_list' | i18next}}</label>
+											<input type="text" class="form-control" id="list" data-ng-model="input.list" required/>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer clearfix">
+									<button class="btn btn-success" data-ng-click="saveChallenge()" ng-disabled="disabled">{{'labels:btn_save' | i18next}}</button>
+									<button class="btn btn-danger" data-ng-click="cancel()" ng-disabled="disabled">{{'labels:btn_cancel' | i18next}}</button>
+								</div>
+							</form>
+						</div>
+						<div class="col-md-12" uib-collapse="!isCollapsed">
+							<button class="btn btn-success btn-add" data-ng-click="addChallenge()">{{'labels:title_add_challenge' | i18next}}</button>
+						</div>
+					</div>
+					<hr/>
+					<div class="row vertical-spacing">
+						<div class="table-actions col-md-12">
+							<table class="table table-striped table-bordered">
+								<tbody>
+									<tr data-ng-repeat="challenge in game.challenges">
+										<td>
+											{{challenge.name}}
+											<button type="button" class="btn btn-danger btn-edit btn-circle pull-right" data-ng-click="deleteConcept(challenge,'challenge')" uib-tooltip="{{'labels:tool_delete' | i18next}}">
+												<span class="glyphicon glyphicon-trash"></span>
+											</button>
+											<button type="button" class="btn btn-primary btn-edit btn-circle pull-right" style="margin-right: 1em;" data-ng-click="editChallenge(challenge)" uib-tooltip="{{'labels:tool_edit' | i18next}}">
+												<span class="glyphicon glyphicon-pencil"></span>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>
 			</uib-tab>
 		</uib-tabset>

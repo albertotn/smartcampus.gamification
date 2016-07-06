@@ -15,7 +15,7 @@ angular.module('gamificationEngine.game', [])
 		$scope.alerts = {
 			//'cantCreateLeaderboards': false,
 			'loadGameError': false
-			//'settingsEdited': false
+				//'settingsEdited': false
 		};
 
 		// Tab switching
@@ -42,6 +42,20 @@ angular.module('gamificationEngine.game', [])
 		// Load games
 		gamesFactory.getGameById($stateParams.id).then(function (game) {
 			$scope.game = game;
+
+			// START ONLY FOR DEBUG
+			$scope.game.challenges = [
+				{
+					'name': "Ottieni almeno 100 punti Green Leaves e avrai tante cose belle"
+				},
+				{
+					'name': "Raccomanda l'app ad almeno 5000 utenti"
+				},
+				{
+					'name': "Gioca o ti picchio"
+				}
+			];
+			// END ONLY FOR DEBUG
 		}, function () {
 			// Show error alert
 			$scope.alerts.loadGameError = true;
@@ -59,7 +73,7 @@ angular.module('gamificationEngine.game', [])
 
 		/*$scope.goToTab = function (tab) {
 			$window.location.href = '#/game/' + $scope.game.id + '?tab=' + tab;
-		};*/		
+		};*/
 
 		/*$scope.openEditModal = function (id) {
 			// Edit a game

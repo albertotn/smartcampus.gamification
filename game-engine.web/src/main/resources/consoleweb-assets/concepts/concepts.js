@@ -15,7 +15,15 @@ angular.module('gamificationEngine.concepts', [])
 		// Error alerts object
 		$scope.alerts = {
 			'genericError': false,
-			'editInstanceError': ''
+			'editInstanceError': '',
+			'challengeError': '',
+			'startError': false,
+			'bonusError': false,
+			'endError': false,
+			'typeError': false,
+			'pointsError': false,
+			'listError': false,
+			'challengeEdited': false
 		};
 
 		// SAVE button click event-handler
@@ -89,13 +97,115 @@ angular.module('gamificationEngine.concepts', [])
 			});
 		};
 
-		gamesFactory.getPoints($rootScope.currentGameId).then(function (points) {
+		function resetAlerts() {
+			$scope.alerts.challengeError = '';
+			$scope.alerts.startError = false;
+			$scope.alerts.bonusError = false;
+			$scope.alerts.endError = false;
+			$scope.alerts.typeError = false;
+			$scope.alerts.pointsError = false;
+			$scope.alerts.listError = false;
+			$scope.alerts.challengeEdited = false;
+		}
+
+		$scope.isCollapsed = true;
+		$scope.title = "labels:title_add_challenge";
+	
+		$scope.addChallenge = function () {
+			$scope.title = "labels:title_add_challenge";
+			newChallenge = true;
+			
+			$scope.input = {};
+			$scope.input.start = new Date();
+			$scope.input.end = new Date();
+			$scope.isCollapsed = false;
+			$scope.alerts.challengeEdited = false;
+		};
+
+		$scope.cancel = function () {
+			resetAlerts();
+			$scope.isCollapsed = true;
+		};
+
+		var errors = 0;
+		$scope.saveChallenge = function () {
+			resetAlerts();
+			var valid = true;
+
+			if (document.getElementsByClassName('has-error').length > errors) {
+				$scope.alerts.startError = true;
+				errors++;
+				valid = false;
+			}
+			if (document.getElementsByClassName('has-error').length > errors) {
+				$scope.alerts.endError = true;
+				valid = true;
+			}
+			errors = 0;
+			if (!$scope.input.bonus) {
+				errors++;
+				$scope.alerts.bonusError = true;
+				valid = false;
+			}
+			if (!$scope.input.challengeType) {
+				errors++;
+				$scope.alerts.typeError = true;
+				valid = false;
+			}
+			if (!$scope.input.points) {
+				errors++;
+				$scope.alerts.pointsError = true;
+				valid = false;
+			}
+			if (!$scope.input.list) {
+				errors++;
+				$scope.alerts.listError = true;
+				valid = false;
+			}
+
+			if (valid) {
+				$scope.disabled = true;
+				gamesFactory.editInstance($scope.game, 'challenges', $scope.input).then(function (instance) {
+					$scope.game.challenges.unshift(instance);
+					$scope.isCollapsed = true;
+					$scope.alerts.challengeEdited = true;
+					$scope.disabled = false;
+				}, function (message) {
+					// Show error alert
+					$scope.alerts.challengeError = 'messages:' + message;
+					$scope.disabled = false;
+				});
+			}
+		};
+
+		var newChallenge = true;
+	
+		$scope.editChallenge = function (editingChallenge) {
+			$scope.title = "labels:title_edit_challenge";
+			newChallenge = false;
+			
+			$scope.input.start = editingChallenge.start;
+			$scope.input.bonus = editingChallenge.bonus;
+			$scope.input.end = editingChallenge.end;
+			$scope.input.challengeType = editingChallenge.challengeType;
+			$scope.input.points = editingChallenge.points;
+			$scope.input.list = editingChallenge.list;
+			
+			$scope.isCollapsed = false;
+			$scope.alerts.challengeEdited = false;
+		};
+
+		/*gamesFactory.getChallenges($rootScope.currentGameId).then(function (challenges) {
+			$scope.challenges = challenges;
+		});*/
+
+		/*gamesFactory.getPoints($rootScope.currentGameId).then(function (points) {
 			$scope.points = points;
 		});
 
 		gamesFactory.getBadges($rootScope.currentGameId).then(function (badges) {
 			$scope.badges = badges;
-		});
+		});*/
 	});
 
 modals.controller('DeleteConceptConfirmModalInstanceCtrl', function ($scope, $uibModalInstance, instance, game, type, gamesFactory) {
@@ -113,9 +223,10 @@ modals.controller('DeleteConceptConfirmModalInstanceCtrl', function ($scope, $ui
 		var tmpGame = angular.copy(game);
 		if (type === 'point') {
 			a = tmpGame.pointConcept;
-		}
-		if (type === 'badge') {
+		} else if (type === 'badge') {
 			a = tmpGame.badgeCollectionConcept;
+		} else if (type === 'challenge') {
+			a = tmpGame.challenges;
 		}
 		a.forEach(function (c) {
 			if (c.id === instance.id && c.name === instance.name) {
@@ -128,9 +239,10 @@ modals.controller('DeleteConceptConfirmModalInstanceCtrl', function ($scope, $ui
 			function () {
 				if (type === 'point') {
 					game.pointConcept = a;
-				}
-				if (type === 'badge') {
+				} else if (type === 'badge') {
 					game.badgeCollectionConcept = a;
+				} else if (type === 'challenge') {
+					game.challenges = a;
 				}
 				$uibModalInstance.close();
 			},
