@@ -119,11 +119,9 @@ angular.module('gamificationEngine.rules', [])
 							}
 						} else {
 							if (published) {
-								console.log("hi");
 								r.content = $scope.input.ruleContent;
 								r.draftContent = '';
 							} else {
-								console.log("maybe here..");
 								//r.content = '';
 								r.draftContent = $scope.input.ruleContent;
 							}
@@ -165,7 +163,6 @@ angular.module('gamificationEngine.rules', [])
 						}
 					}*/
 
-					console.log(r);
 					if ($scope.input.name != 'constants') {
 						gamesFactory.validateRule($scope.input.ruleContent).then(function (data) {
 							if (data.length > 0) {
@@ -286,6 +283,7 @@ angular.module('gamificationEngine.rules', [])
 
 		$scope.addRule = function () {
 			$scope.input = {};
+			$scope.input.published = true;
 			rule = null;
 			$scope.alerts.ruleEdited = false;
 			$scope.list = false;

@@ -82,5 +82,15 @@
   "btn_draft": "Salva come bozza",
   "lbl_add_rule": "Aggiungi regola",
   "title_add_task": "Aggiungi una nuova classifica",
-  "btn_generate": "Genera"
+  "btn_generate": "Genera",
+  "lbl_order": "Ordina",
+  "lbl_filter": "Filtra",
+  "lbl_search": "Cerca",
+  "opt_recent": "più recenti",
+  "opt_alphabetically": "alfabeticamente",
+  "opt_all": "tutti",
+  "opt_published": "pubblicate",
+  "lbl_last_edit": "Ultima modifica",
+  "lbl_saved_draft": "Salvata come draft",
+  "lbl_status": "Stato"
 }

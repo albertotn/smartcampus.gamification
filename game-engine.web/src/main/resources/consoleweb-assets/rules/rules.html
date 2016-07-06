@@ -21,7 +21,7 @@
 		<div class="col-md-12 horizontalCollapse" ng-class="{'in': !list}">
 			<div class="col-md-12">
 				<h4>{{title | i18next}} <span ng-show="input.name">&lt;{{input.name}}&gt;</span></h4>
-				<h5>Status: {{input.status}}</h5>
+				<h5>{{'labels:lbl_status' | i18next}}: {{input.status}}</h5>
 			</div>
 			<div class="col-md-12">
 				<form role="form">
@@ -88,26 +88,26 @@
 				<div class="col-md-12" id="rule-filter">
 					<form class="form-inline">
 						<div class="form-group">
-							<h5>Order:</h5>
+							<h5>{{'labels:lbl_order' | i18next}}:</h5>
 							<div class="select">
 								<select ng-model="order">
-									<option value="lastUpdate">recent</option>
-									<option value="name">alphabetically</option>
+									<option value="lastUpdate">{{'labels:opt_recent' | i18next}}</option>
+									<option value="name">{{'labels:opt_alphabetically' | i18next}}</option>
 								</select>
 							</div>
 						</div>
 						<div class="form-group">
-							<h5>Filter:</h5>
+							<h5>{{'labels:lbl_filter' | i18next}}:</h5>
 							<div class="select">
 								<select ng-model="search">
-									<option value="all">all</option>
-									<option value="true">published</option>
+									<option value="all">{{'labels:opt_all' | i18next}}</option>
+									<option value="true">{{'labels:opt_published' | i18next}}</option>
 									<option value="false">draft</option>
 								</select>
 							</div>
 						</div>
 						<div class="form-group">
-							<h5>Search:</h5>
+							<h5>{{'labels:lbl_search' | i18next}}:</h5>
 							<div class="form-group has-feedback">
 								<input type="text" class="form-control" ng-model="searchText" />
 								<i class="glyphicon glyphicon-search form-control-feedback"></i>
@@ -123,8 +123,8 @@
 							<td>
 								<div class="row rule">
 									<div class="status" ng-class="{'published': rule.published, 'draft': !rule.published}"><span><!--{{rule.status}}-->{{rule.published ? 'published' : 'draft'}}</span></div>
-									<div class="date" ng-if="(rule.published && !rule.draftContent) || !rule.published"><span>Last edit {{convertDate(rule.lastUpdate)}}</span></div>
-									<div class="date" ng-if="rule.published && rule.draftContent"><span>Save as draft {{convertDate(rule.lastUpdate)}}</span></div>
+									<div class="date" ng-if="(rule.published && !rule.draftContent) || !rule.published"><span>{{'labels:lbl_last_edit' | i18next}}: {{convertDate(rule.lastUpdate)}}</span></div>
+									<div class="date" ng-if="rule.published && rule.draftContent"><span>{{'labels:lbl_saved_draft' | i18next}}: {{convertDate(rule.lastUpdate)}}</span></div>
 									<div class="col-md-12">
 										{{rule.name ? rule.name : rule.id}}
 										<button type="button" class="btn btn-danger btn-circle pull-right" data-ng-click="deleteRule(rule)" uib-tooltip="{{'labels:tool_delete' | i18next}}">

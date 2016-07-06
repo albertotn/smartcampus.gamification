@@ -127,7 +127,7 @@
 					<h5>Filter:</h5>
 					<div class="select">
 						<select ng-model="search">
-							<option value="all">all</option>
+							<option value="all">{{'labels:opt_all' | i18next}}</option>
 							<option value="general">general</option>
 							<option value="incremental">incremental</option>
 						</select>
@@ -144,7 +144,7 @@
 						<td>
 							<div class="row task">
 								<div class="type" ng-class="{'general': task.type == 'general', 'incremental': task.type == 'incremental'}"><span>{{task.type}}</span></div>
-								<div class="status"><span>Status: {{task.status}}</span></div>
+								<div class="status"><span>{{'labels:lbl_status' | i18next}}: {{task.status}}</span></div>
 								<div class="col-md-12">
 									{{task.name}}
 									<button type="button" class="btn btn-danger btn-edit btn-circle pull-right" data-ng-click="deleteTask(task)" uib-tooltip="{{'labels:tool_delete' | i18next}}">
