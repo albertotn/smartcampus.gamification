@@ -258,6 +258,34 @@ STATE MONITOR
 .details .badge-elem {
 	margin-right: 10px;
 }
+.record .block-player {
+	font-weight: bolder;
+	color: rgb(205,41,42);
+	margin: 10px 20px;
+	cursor: pointer;
+}
+.record .btn-reset {
+	background: rgb(136,35,132);
+}
+.record .btn-reset img {
+	position: relative;
+	top: -4px;
+	left: -1.5px;
+	width: 85%;
+}
+#monitor-filter {
+	margin: 20px 0;
+}
+#monitor-filter .select {
+	display:inline;
+	/*margin-right: 30px;*/
+}
+#monitor-filter #filter {
+	cursor: pointer;
+	display: block;
+	font-size: 12px;
+	color: rgb(55,159,244);
+}
 /*.monitor-row {
 	background-color: #E6E6E6;
 	margin-bottom: 0.1em;

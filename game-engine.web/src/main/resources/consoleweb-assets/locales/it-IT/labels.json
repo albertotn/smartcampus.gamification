@@ -78,5 +78,15 @@
   "lbl_total": "Totali",
   "lbl_players_list": "Lista giocatori",
   "lbl_game": "Gioco",
-  "tool_view": "visualizza"
+  "tool_view": "visualizza",
+  "lbl_block_player": "Blocca questo giocatore",
+  "opt_alphabetically": "alfabetico",
+  "opt_increasing": "crescente",
+  "opt_decreasing": "decrescente",
+  "lbl_order": "Ordine",
+  "lbl_filter": "Filtro",
+  "lbl_search": "Ricerca",
+  "opt_all": "tutti",
+  "opt_teams": "squadre",
+  "opt_players": "giocatori"
 }
