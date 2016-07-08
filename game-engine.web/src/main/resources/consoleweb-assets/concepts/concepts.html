@@ -108,6 +108,11 @@
 								<uib-alert ng-if="!!alerts.challengeEdited" type="success" close="alerts.challengeEdited = false">{{'messages:msg_challenge_edited' | i18next}}</uib-alert>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<uib-alert ng-if="!!alerts.challengeDeleted" type="success" close="$scope.alerts.challengeDeleted = false">{{'messages:msg_challenge_deleted' | i18next}}</uib-alert>
+							</div>
+						</div>
 						<div uib-collapse="isCollapsed" class="col-md-12">
 							<h4>{{title | i18next}}</h4>
 							<form role="form" name="challengeForm">
