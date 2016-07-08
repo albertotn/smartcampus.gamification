@@ -82,8 +82,6 @@ angular.module('gamificationEngine.rules', [])
 					var r = (rule) ? rule : {};
 					r.name = $scope.input.name;
 
-					//r.published = published;
-					//r.lastUpdate = Date().getTime();
 					r.lastUpdate = Date.now(); // CHECK IF IS CORRECT
 					
 					var previousStatus = (rule) ? rule.published : false;
@@ -133,35 +131,6 @@ angular.module('gamificationEngine.rules', [])
 							r.draftContent = $scope.input.ruleContent;
 						}
 					}
-					/*if (rule && !rule.published) {
-						if (published) {
-							r.content = $scope.input.draftContent;
-						} else {
-							r.draftContent = $scope.input.draftContent;
-						}
-					} else {
-						if (published) {
-							r.content = $scope.input.ruleContent;
-						} else {
-							r.draftContent = $scope.input.draftContent;
-						}
-					}*/
-
-					/*if (published) {
-						if (rule && !rule.published) {
-							r.content = $scope.input.draftContent;
-							r.draftContent = '';
-						} else {
-							r.content = $scope.input.ruleContent;
-							r.draftContent = '';
-						}
-					} else {
-						if (rule) {
-							r.draftContent = $scope.input.draftContent;
-						} else {
-							r.draftContent = $scope.input.ruleContent;
-						}
-					}*/
 
 					if ($scope.input.name != 'constants') {
 						gamesFactory.validateRule($scope.input.ruleContent).then(function (data) {
@@ -411,11 +380,32 @@ angular.module('gamificationEngine.rules', [])
 				return rule;
 			}
 		}
+		
+		$scope.selectedRules = [];
+		$scope.toggleSelection = function (rule) {
+			var idx = $scope.selectedRules.indexOf(rule);
+			if (idx > -1) {
+				$scope.selectedRules.splice(idx, 1);
+			} else {
+				$scope.selectedRules.push(rule);
+			}
+		}
+		
+		$scope.publishSelection = function () {
+			for (var r in $scope.selectedRules) {
+				$scope.selectedRules[r].published = true;
+				$scope.selectedRules[r].content = $scope.selectedRules[r].draftContent;
+				$scope.selectedRules[r].draftContent = '';
+				addRuleAPI(game, $scope.selectedRules[r]);
+			}
+			
+			$scope.selectedRules = [];
+		}
 
 		// Load game
 		gamesFactory.getGameById($stateParams.id).then(function (game) {
 			$scope.game = game;
-			console.log(game.rules);
+			//console.log(game.rules);
 		}, function () {
 			// Show error alert
 			$scope.alerts.loadGameError = true;

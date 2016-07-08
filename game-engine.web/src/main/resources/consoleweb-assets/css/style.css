@@ -352,6 +352,9 @@ hr {
 #rule-filter h5 {
 	display: inline;
 }
+.selected {
+	background: rgb(219,219,219);
+}
 
 .rule .status {
 	float: left;

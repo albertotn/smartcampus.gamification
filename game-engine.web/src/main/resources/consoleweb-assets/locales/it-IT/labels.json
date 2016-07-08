@@ -92,5 +92,6 @@
   "opt_published": "pubblicate",
   "lbl_last_edit": "Ultima modifica",
   "lbl_saved_draft": "Salvata come draft",
-  "lbl_status": "Stato"
+  "lbl_status": "Stato",
+  "lbl_publish_selection": "Pubblica selezione"
 }
