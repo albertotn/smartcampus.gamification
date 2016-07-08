@@ -80,6 +80,7 @@
   "lbl_game": "Gioco",
   "tool_view": "visualizza",
   "lbl_block_player": "Blocca questo giocatore",
+  "lbl_unlock_player": "Sblocca questo giocatore",
   "opt_alphabetically": "alfabetico",
   "opt_increasing": "crescente",
   "opt_decreasing": "decrescente",
@@ -88,5 +89,12 @@
   "lbl_search": "Ricerca",
   "opt_all": "tutti",
   "opt_teams": "squadre",
-  "opt_players": "giocatori"
+  "opt_players": "giocatori",
+  "lbl_adv_filter": "Filtro avanzato",
+  "lbl_score": "Punteggio",
+  "lbl_less": "Minore di",
+  "lbl_more": "Maggiore di",
+  "lbl_between": "Compreso tra",
+  "lbl_and": "e",
+  "btn_filter": "Filtra"
 }
