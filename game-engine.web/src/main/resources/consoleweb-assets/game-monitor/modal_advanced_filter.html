@@ -1,0 +1,95 @@
+<!--
+
+       Copyright 2015 Fondazione Bruno Kessler - Trento RISE
+
+       Licensed under the Apache License, Version 2.0 (the "License");
+       you may not use this file except in compliance with the License.
+       You may obtain a copy of the License at
+
+           http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing, software
+       distributed under the License is distributed on an "AS IS" BASIS,
+       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+       See the License for the specific language governing permissions and
+       limitations under the License.
+
+-->
+
+<div class="text-center">
+	<h4>{{'labels:lbl_adv_filter' | i18next}}</h4>
+</div>
+<div id="players-filter">
+	<form class="form-inline" name="scoreForm" id="filter-points">
+		<div class="row">
+			<div class="col-md-12">
+				<h5>{{'labels:lbl_score' | i18next}}</h5>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group" ng-class="{'has-error': scoreForm.min.$error.pattern}">
+					<div class="radio">
+						<label>
+							<input type="radio" name="score" ng-model="filterType" value="less"/>
+							<span>{{'labels:lbl_less' | i18next}}:</span>
+							<input type="text" class="form-control" data-ng-model="score.min" name="min" data-ng-pattern="/^\d+$/" required/>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group" ng-class="{'has-error': scoreForm.max.$error.pattern}">
+					<div class="radio">
+						<label>
+							<input type="radio" name="score" ng-model="filterType" value="more"/>
+							<span>{{'labels:lbl_more' | i18next}}:</span>
+							<input type="text" class="form-control" data-ng-model="score.max" name="max" data-ng-pattern="/^\d+$/" required/>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group">
+					<div class="radio" ng-class="{'has-error':scoreForm.bMin.$error.pattern || scoreForm.bMax.$error.pattern}">
+						<label>
+							<input type="radio" name="score" ng-model="filterType" value="between"/>
+							<span>{{'labels:lbl_between' | i18next}}:</span>
+							<input type="text" class="form-control" data-ng-model="score.bMin" name="bMin" data-ng-pattern="/^\d+$/" required/>
+							<span>{{'labels:lbl_and' | i18next}}</span>
+							<input type="text"class="form-control"  data-ng-model="score.bMax" name="bMax" data-ng-pattern="/^\d+$/" required/>
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<hr/>
+	<form class="form" id="filter-badges">
+		<div class="row">
+			<div class="col-md-12">
+				<h5>Badge collection:</h5>
+				<div class="select">
+					<select ng-model="badge" style="width: 150px">
+						<option ng-repeat="b in badges" value="{{$index}}">{{b.name}}</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">
+				<h5>Badge:</h5>
+			</div>
+			<div class="col-md-10">
+				<div class="checkbox" ng-repeat="p in badges[badge].points">
+					<label>
+						<input type="checkbox" ng-click="toggleSelection(p)"/>
+						<span>{{p}}</span>
+					</label>
+				</div>
+			</div>
+		</div>
+	</form>
+	<div class="text-center">
+		<button type="submit" class="btn btn-success" data-ng-click="filter()" ng-disabled="disabled">{{'labels:btn_filter' | i18next}}</button>
+		<button type="reset" class="btn btn-danger" data-ng-click="cancel()" ng-disabled="disabled">{{'labels:btn_cancel' | i18next}}</button>
+	</div>
+</div>

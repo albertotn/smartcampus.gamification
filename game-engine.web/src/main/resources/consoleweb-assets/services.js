@@ -190,22 +190,22 @@ angular.module('gamificationEngine.services', [])
 			} else if (!!getGameByName(fields.name) && game.name !== fields.name) {
 				deferred.reject('msg_game_name_exists_error');
 			} else {*/
-				if (!game.id) {
-					game = {};
-				}
-				game.name = fields.name;
-				game.expiration = fields.expiration;
+			if (!game.id) {
+				game = {};
+			}
+			game.name = fields.name;
+			game.expiration = fields.expiration;
 
-				$http.post(url + '/console/game', game).
-				success(function (data, status, headers, config) {
-					if (!game.id) {
-						$rootScope.games.unshift(data);
-					}
-					deferred.resolve(data);
-				}).
-				error(function (data, status, headers, config) {
-					deferred.reject('msg_generic_error');
-				});
+			$http.post(url + '/console/game', game).
+			success(function (data, status, headers, config) {
+				if (!game.id) {
+					$rootScope.games.unshift(data);
+				}
+				deferred.resolve(data);
+			}).
+			error(function (data, status, headers, config) {
+				deferred.reject('msg_generic_error');
+			});
 			//}
 			return deferred.promise;
 		};
@@ -214,53 +214,53 @@ angular.module('gamificationEngine.services', [])
 		var editInstance = function (game, instanceType, instanceProperties) {
 			var deferred = $q.defer();
 			//var instance = {};
-			
+
 			/*if (!instanceProperties.name) {
 				deferred.reject('msg_instance_name_error');
 			} else */
 			//if (instance.id == null) {
-				// New instance
-				/*if (!!existsInstanceByName(game, instanceProperties.name, instanceType)) {
-					// Instance with same name alredy exists
-					deferred.reject('msg_instance_name_exists_error');
-				} else {*/
-					// Create new instance
-					var id = 1;
-					angular.forEach(game.concepts, function (i) {
-						if (i.id > id) {
-							id = i.id;
-						}
-						id++;
-					});
-
-					var instance = {
-						'id': id,
-						'name': instanceProperties.name
-					};
-
-					var tmpGame = angular.copy(game);
-
-					// Choose instance object structure
-					if (instanceType == 'points') {
-						tmpGame.pointConcept.unshift(instance);
-					} else if (instanceType == 'badges_collections') {
-						tmpGame.badgeCollectionConcept.unshift(instance);
-					}
-
-					$http.post(url + '/console/game', tmpGame).success(function (data, status, headers, config) {
-						/*if (instanceType == 'points') {
-							game.pointConcept.push(instance);
-						} else if (instanceType == 'badges_collections') {
-							game.badgeCollectionConcept.push(instance);
-						}*/
-						deferred.resolve(instance);
-					}).error(function (data, status, headers, config) {
-						deferred.reject('msg_generic_error');
-					});
-				//}
-			//} else if (!!existsInstanceByName(game, instanceProperties.name, instanceType) && instance.name != instanceProperties.name) {
+			// New instance
+			/*if (!!existsInstanceByName(game, instanceProperties.name, instanceType)) {
 				// Instance with same name alredy exists
-				//deferred.reject('msg_instance_name_exists_error');
+				deferred.reject('msg_instance_name_exists_error');
+			} else {*/
+			// Create new instance
+			var id = 1;
+			angular.forEach(game.concepts, function (i) {
+				if (i.id > id) {
+					id = i.id;
+				}
+				id++;
+			});
+
+			var instance = {
+				'id': id,
+				'name': instanceProperties.name
+			};
+
+			var tmpGame = angular.copy(game);
+
+			// Choose instance object structure
+			if (instanceType == 'points') {
+				tmpGame.pointConcept.unshift(instance);
+			} else if (instanceType == 'badges_collections') {
+				tmpGame.badgeCollectionConcept.unshift(instance);
+			}
+
+			$http.post(url + '/console/game', tmpGame).success(function (data, status, headers, config) {
+				/*if (instanceType == 'points') {
+					game.pointConcept.push(instance);
+				} else if (instanceType == 'badges_collections') {
+					game.badgeCollectionConcept.push(instance);
+				}*/
+				deferred.resolve(instance);
+			}).error(function (data, status, headers, config) {
+				deferred.reject('msg_generic_error');
+			});
+			//}
+			//} else if (!!existsInstanceByName(game, instanceProperties.name, instanceType) && instance.name != instanceProperties.name) {
+			// Instance with same name alredy exists
+			//deferred.reject('msg_instance_name_exists_error');
 			/*} else {
 				// Edit instance
 
@@ -357,19 +357,85 @@ angular.module('gamificationEngine.services', [])
 			return deferred.promise;
 		}
 
-		var getPlayersState = function (gameId, playerFilter, pageRequest, pageSize) {
+		var getPlayersState = function (gameId, category, playerFilter, pageRequest, pageSize) {
 			var deferred = $q.defer();
 			$http.get(url + '/gengine/state/' + gameId, {
 				params: {
 					page: pageRequest,
 					size: pageSize,
-					playerFilter: playerFilter
+					playerFilter: playerFilter,
+					category: category
 				}
 			}).success(function (data, status, headers, config) {
 				deferred.resolve(data);
 			}).error(function (data, status, headers, config) {
 				deferred.reject('msg_generic_error');
 			});
+
+			return deferred.promise;
+		}
+
+		var blockPlayer = function (gameId, playerId) {
+			var deferred = $q.defer();
+			$http.get(url + '/')
+				.success(function () {
+					deferred.resolve();
+				})
+				.error(function () {
+					deferred.reject();
+				});
+
+			return deferred.promise;
+		}
+
+		var unlockPlayer = function (gameId, playerId) {
+			var deferred = $q.defer();
+			$http.get(url + '/')
+				.success(function () {
+					deferred.resolve();
+				})
+				.error(function () {
+					deferred.reject();
+				});
+
+			return deferred.promise;
+		}
+
+		var resetPlayer = function (gameId, playerId) {
+			var deferred = $q.defer();
+			$http.get(url + '/')
+				.success(function () {
+					deferred.resolve();
+				})
+				.error(function () {
+					deferred.reject();
+				});
+
+			return deferred.promise;
+		}
+
+		var editPlayer = function (gameId, player) {
+			var deferred = $q.defer();
+			$http.get(url + '/')
+				.success(function () {
+					deferred.resolve();
+				})
+				.error(function () {
+					deferred.reject();
+				});
+
+			return deferred.promise;
+		}
+
+		var getListOfBadges = function (gameId, badgeCollection) {
+			var deferred = $q.defer();
+			$http.get(url + '/console/game/' + gameId + '/badges/' + badgeCollection)
+				.success(function (data) {
+					deferred.resolve(data);
+				})
+				.error(function () {
+					deferred.reject();
+				});
 
 			return deferred.promise;
 		}
@@ -393,6 +459,11 @@ angular.module('gamificationEngine.services', [])
 			'editTask': editTask,
 			'validateRule': validateRule,
 			'getPlayersState': getPlayersState,
+			'blockPlayer': blockPlayer,
+			'unlockPlayer': unlockPlayer,
+			'resetPlayer': resetPlayer,
+			'editPlayer': editPlayer,
+			'getListOfBadges': getListOfBadges
 		};
 	})
 	.factory('utilsFactory', function () {

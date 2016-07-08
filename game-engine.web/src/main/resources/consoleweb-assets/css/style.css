@@ -264,6 +264,12 @@ STATE MONITOR
 	margin: 10px 20px;
 	cursor: pointer;
 }
+.record .unlock-player {
+	font-weight: bolder;
+	color: rgb(111,194,59);
+	margin: 10px 20px;
+	cursor: pointer;
+}
 .record .btn-reset {
 	background: rgb(136,35,132);
 }
@@ -277,14 +283,63 @@ STATE MONITOR
 	margin: 20px 0;
 }
 #monitor-filter .select {
-	display:inline;
-	/*margin-right: 30px;*/
+	width: 70% !important;
 }
 #monitor-filter #filter {
-	cursor: pointer;
 	display: block;
-	font-size: 12px;
+	position: relative;
+	left: 100px;
+	top: 3px;
+	cursor: pointer;
+	font-size: 13px;
 	color: rgb(55,159,244);
+}
+#players-filter {
+	padding: 20px 25px;
+}
+#filter-points .radio {
+	margin: 5px 10px;
+}
+#filter-points .form-control {
+	width: 80px;
+	height: 25px;
+	margin: 0 5px;
+}
+#players-filter .row {
+	margin: 15px 0;
+}
+#players-filter h5 {
+	display: inline;
+	margin: 10px;
+}
+#filter-badges .checkbox {
+	margin-top: 0;
+}
+.blocked .id {
+	color: rgb(170,170,170);
+}
+.blocked button {
+	opacity: 0.5;
+}
+.details input {
+	display: inline;
+	height: 23px;
+	padding: 0 5px;
+	overflow: visible;
+	width: 50px;
+	line-height: 20px;
+	border-radius: 5px;
+	box-shadow: none;
+	border: 1px solid rgb(170,170,170);
+}
+.btn-add-point {
+	width: 20px;
+	padding: 3px 0 0 0;
+	height: 20px;
+	text-align: center;
+	font-size: 12px;
+	line-height: 1.42;
+	border-radius: 10px;
 }
 /*.monitor-row {
 	background-color: #E6E6E6;
